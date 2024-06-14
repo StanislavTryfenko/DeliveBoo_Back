@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\RestaurantSeeder;
 use Database\Seeders\DishSeeder;
 use Database\Seeders\UsersSeeder;
+use Database\Seeders\TypeSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        /* first create users */
+        /* first create users and types for dependency reasons */
         $this->call([
-            UsersSeeder::class
+            UsersSeeder::class,
+            TypeSeeder::class
         ]);
-        /* then consider restaurant dependency on user */
+        /* then */
         $this->call([
             DishSeeder::class,
             RestaurantSeeder::class
