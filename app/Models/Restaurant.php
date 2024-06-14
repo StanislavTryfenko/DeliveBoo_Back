@@ -8,13 +8,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Restaurant extends Model
 {
-
     use HasFactory;
-
     protected $fillable = ['contact_email', 'vat', 'name', 'slug', 'address', 'phone_number', 'logo', 'thumb', 'user_id'];
 
+    /**
+     * Get the user that owns the Restaurant
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    /**
+     * Get the type that owns the Restaurant
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(Type::class);
     }
 }
