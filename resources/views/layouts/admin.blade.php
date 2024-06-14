@@ -27,7 +27,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-3">
-						@yield('sideMenu')
+						@include('layouts.partials.sideMenu')
 					</div>
 					<div class="col-9">
 						<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
