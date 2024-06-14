@@ -23,11 +23,9 @@ class RestaurantController extends Controller
 
 
         $user = User::find($user_id);
-        $control = $user->restaurant;
-        dd($control);
+        $restaurant = $user->restaurant();
 
-
-        return view('admin.dashboard', compact('user_id'));
+        return view('dashboard', compact('restaurant')); 
     }
 
     /**
@@ -36,7 +34,7 @@ class RestaurantController extends Controller
     public function create()
     {
 
-        return view('admin.dashboard');
+        return view('dashboard');
 
     }
 
@@ -62,7 +60,7 @@ class RestaurantController extends Controller
         }
 
         $restaurant = Restaurant::create($validated);
-        return to_route('admin.dashboard')->with('message', 'Restaurant added with Success!');
+        return to_route('dashboard')->with('message', 'Restaurant added with Success!');
 
     }
 
@@ -72,7 +70,7 @@ class RestaurantController extends Controller
     public function show(Restaurant $restaurant)
     {
 
-        return view('admin.dashboard', compact('restaurant'));
+        return view('dashboard', compact('restaurant'));
 
     }
 
@@ -81,7 +79,7 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        return view('admin.dashboard', compact('restaurant'));
+        return view('dashboard', compact('restaurant'));
 
     }
 
@@ -115,7 +113,7 @@ class RestaurantController extends Controller
         }
 
         $restaurant->update($validated);
-        return to_route('admin.dashboard', $restaurant)->with('message', "Your $restaurant->title Updated");
+        return to_route('dashboard', $restaurant)->with('message', "Your $restaurant->title Updated");
 
     }
 
@@ -132,6 +130,6 @@ class RestaurantController extends Controller
         }
 
         $restaurant->delete();
-        return to_route('admin.dashboard')->with('message', "Your $restaurant->title deleted");
+        return to_route('dashboard')->with('message', "Your $restaurant->title deleted");
     }
 }
