@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Dish;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
 use Illuminate\Support\Str;
@@ -15,7 +16,8 @@ class DishController extends Controller
      */
     public function index()
     {
-        return view('admin.dishes.index');
+        $dishes = Dish::all();
+        return view('admin.dishes.index', compact('dishes'));
     }
 
     /**
@@ -76,7 +78,7 @@ class DishController extends Controller
             $validated['image'] = $image;
         }
 
-        $dish = Dish::update($validated);
+        $dish->update($validated);
         return to_route('admin.dishes.index')->with('message', "Change with Success!");
     }
 

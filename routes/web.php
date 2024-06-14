@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\DishController;
+use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\Admin\RestaurantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,8 +35,8 @@ Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->prefix('admin')
     ->group(function () {
-        Route::get('/', [RestaurantController::class, 'index'])->name('dashboard');
-        Route::get('/dishes', [DishController::class])->name('dish');
+        Route::get('/', [RestaurantController::class, 'index'])->name('restaurant');
+        Route::get('/dishes', [DishController::class, 'index'])->name('dish');
     });
 
 require __DIR__ . '/auth.php';
