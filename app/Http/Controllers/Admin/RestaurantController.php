@@ -21,11 +21,12 @@ class RestaurantController extends Controller
     {
         $user_id = Auth::id();
 
-
         $user = User::find($user_id);
-        $restaurant = $user->restaurant();
 
-        return view('dashboard', compact('restaurant')); 
+        $restaurant = $user->restaurant;
+
+        return view('dashboard', compact('restaurant'));
+
     }
 
     /**
@@ -46,7 +47,7 @@ class RestaurantController extends Controller
 
         $validated = $request->validated();
 
-        $slug = Str::slug($request->title, '-');
+        $slug = Str::slug($request->name, '-');
         $validated['slug'] = $slug;
 
         if ($request->has('logo')) {
@@ -58,7 +59,7 @@ class RestaurantController extends Controller
             $thumb = Storage::put('uploads', $validated['thumb']);
             $validated['thumb'] = $thumb;
         }
-
+        /* dd($validated); */
         $restaurant = Restaurant::create($validated);
         return to_route('dashboard')->with('message', 'Restaurant added with Success!');
 
