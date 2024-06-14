@@ -22,9 +22,11 @@ class RestaurantController extends Controller
         $user_id = Auth::id();
 
         $user = User::find($user_id);
+
         $restaurant = $user->restaurant;
 
         return view('dashboard', compact('restaurant'));
+
     }
 
     /**
@@ -32,7 +34,9 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        /* return view('dashboard'); */
+
+        return view('dashboard');
+
     }
 
     /**
@@ -66,7 +70,9 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
+
         return view('dashboard', compact('restaurant'));
+
     }
 
     /**
@@ -75,6 +81,7 @@ class RestaurantController extends Controller
     public function edit(Restaurant $restaurant)
     {
         return view('dashboard', compact('restaurant'));
+
     }
 
     /**
