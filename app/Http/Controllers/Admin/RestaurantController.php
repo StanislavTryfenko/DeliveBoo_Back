@@ -10,7 +10,7 @@ use App\Http\Requests\UpdateRestaurantRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
-
+use App\Models\Type;
 
 class RestaurantController extends Controller
 {
@@ -24,7 +24,8 @@ class RestaurantController extends Controller
         $user = User::find($user_id);
 
         $restaurant = $user->restaurant;
-        return view('admin.restaurants.index', compact('restaurant'));
+        $typeList = Type::all();
+        return view('admin.restaurants.index', compact('restaurant','typeList'));
     }
 
     /**
@@ -41,6 +42,7 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantRequest $request)
     {
+        //dd($request->all());
 
         $validated = $request->validated();
 
@@ -58,8 +60,16 @@ class RestaurantController extends Controller
             $thumb = Storage::put('uploads', $validated['thumb']);
             $validated['thumb'] = $thumb;
         }
+
         /* dd($validated); */
         $restaurant = Restaurant::create($validated);
+
+        if ($request->has('typeList')) { 
+            $restaurant->type()->attach($validated['typeList']); 
+        }
+
+        
+
         return to_route('admin.restaurants.index')->with('message', 'Restaurant added with Success!');
     }
 
