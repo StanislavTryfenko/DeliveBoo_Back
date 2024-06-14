@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Restaurant;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 
 class RestaurantController extends Controller
@@ -16,9 +19,15 @@ class RestaurantController extends Controller
      */
     public function index()
     {
+        $user_id = Auth::id();
 
-        return view('admin.dashboard');
 
+        $user = User::find($user_id);
+        $control = $user->restaurant;
+        dd($control);
+
+
+        return view('admin.dashboard', compact('user_id'));
     }
 
     /**
