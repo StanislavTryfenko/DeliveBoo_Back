@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateRestaurantRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
+
 class RestaurantController extends Controller
 {
     /**
@@ -15,7 +16,9 @@ class RestaurantController extends Controller
      */
     public function index()
     {
+
         return view('admin.dashboard');
+
     }
 
     /**
@@ -23,7 +26,9 @@ class RestaurantController extends Controller
      */
     public function create()
     {
+
         return view('admin.dashboard');
+
     }
 
     /**
@@ -31,6 +36,7 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantRequest $request)
     {
+
         $validated = $request->validated();
 
         $slug = Str::slug($request->title, '-');
@@ -48,6 +54,7 @@ class RestaurantController extends Controller
 
         $restaurant = Restaurant::create($validated);
         return to_route('admin.dashboard')->with('message', 'Restaurant added with Success!');
+
     }
 
     /**
@@ -55,7 +62,9 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
+
         return view('admin.dashboard', compact('restaurant'));
+
     }
 
     /**
@@ -64,6 +73,7 @@ class RestaurantController extends Controller
     public function edit(Restaurant $restaurant)
     {
         return view('admin.dashboard', compact('restaurant'));
+
     }
 
     /**
@@ -71,6 +81,7 @@ class RestaurantController extends Controller
      */
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
+
         $validated = $request->validated();
 
         $slug = Str::slug($request->title, '-');
@@ -96,6 +107,7 @@ class RestaurantController extends Controller
 
         $restaurant->update($validated);
         return to_route('admin.dashboard', $restaurant)->with('message', "Your $restaurant->title Updated");
+
     }
 
     /**
