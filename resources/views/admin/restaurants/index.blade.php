@@ -87,6 +87,8 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
+
+                            
                         @else
                             <div class="h2">{{ $restaurant->name }}</div>
                             <div class="h2">{{ $restaurant->address }}</div>
@@ -95,6 +97,13 @@
                             <div class="h2">{{ $restaurant->logo }}</div>
                             <div class="h2">{{ $restaurant->thumb }}</div>
                             <div class="h2">{{ $restaurant->vat }}</div>
+
+                            <a href="{{route('admin.restaurants.edit',$restaurant)}}"><button class="btn btn-primary">Edit Restaurant</button></a>
+                            <form action="{{route('admin.restaurants.destroy',$restaurant)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                               <button class="btn btn-danger" type="submit">Cancella</button>
+                            </form>
                         @endif
 
                     </div>
