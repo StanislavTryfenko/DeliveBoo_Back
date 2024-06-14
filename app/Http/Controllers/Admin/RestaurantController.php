@@ -77,7 +77,7 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        return view('dashboard', compact('restaurant'));
+        return view('admin.restaurants.edit', compact('restaurant'));
     }
 
     /**
@@ -86,9 +86,10 @@ class RestaurantController extends Controller
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
 
+        //dd($request->all());
         $validated = $request->validated();
 
-        $slug = Str::slug($request->title, '-');
+        $slug = Str::slug($request->name, '-');
         $validated['slug'] = $slug;
 
         if ($request->has('logo')) {
@@ -108,7 +109,7 @@ class RestaurantController extends Controller
             $thumb = Storage::put('uploads', $validated['thumb']);
             $validated['thumb'] = $thumb;
         }
-
+        //dd($validated);
         $restaurant->update($validated);
         return to_route('dashboard', $restaurant)->with('message', "Your $restaurant->title Updated");
     }
@@ -118,6 +119,7 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
+       
         if ($restaurant->logo) {
             Storage::delete($restaurant->logo);
         }
