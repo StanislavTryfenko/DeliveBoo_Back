@@ -20,9 +20,9 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
+/* Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard'); */
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,8 +35,8 @@ Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->prefix('admin')
     ->group(function () {
-        Route::get('/', [RestaurantController::class, 'index'])->name('restaurant');
-        Route::get('/dishes', [DishController::class, 'index'])->name('dish');
+        Route::resource('/', RestaurantController::class);
+        Route::resource('/dishes', DishController::class);
     });
 
 require __DIR__ . '/auth.php';
