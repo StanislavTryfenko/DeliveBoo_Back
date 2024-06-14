@@ -24,9 +24,7 @@ class RestaurantController extends Controller
         $user = User::find($user_id);
 
         $restaurant = $user->restaurant;
-
-        return view('dashboard', compact('restaurant'));
-
+        return view('admin.restaurants.index', compact('restaurant'));
     }
 
     /**
@@ -36,7 +34,6 @@ class RestaurantController extends Controller
     {
 
         return view('dashboard');
-
     }
 
     /**
@@ -50,6 +47,8 @@ class RestaurantController extends Controller
         $slug = Str::slug($request->name, '-');
         $validated['slug'] = $slug;
 
+        $validated['user_id'] =  Auth::id();
+
         if ($request->has('logo')) {
             $logo = Storage::put('uploads', $validated['logo']);
             $validated['logo'] = $logo;
@@ -61,8 +60,7 @@ class RestaurantController extends Controller
         }
         /* dd($validated); */
         $restaurant = Restaurant::create($validated);
-        return to_route('dashboard')->with('message', 'Restaurant added with Success!');
-
+        return to_route('admin.restaurants.index')->with('message', 'Restaurant added with Success!');
     }
 
     /**
@@ -72,7 +70,6 @@ class RestaurantController extends Controller
     {
 
         return view('dashboard', compact('restaurant'));
-
     }
 
     /**
@@ -81,7 +78,6 @@ class RestaurantController extends Controller
     public function edit(Restaurant $restaurant)
     {
         return view('dashboard', compact('restaurant'));
-
     }
 
     /**
@@ -115,7 +111,6 @@ class RestaurantController extends Controller
 
         $restaurant->update($validated);
         return to_route('dashboard', $restaurant)->with('message', "Your $restaurant->title Updated");
-
     }
 
     /**
