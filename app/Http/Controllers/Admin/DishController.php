@@ -91,7 +91,6 @@ class DishController extends Controller
             Storage::delete($dish->image);
         }
 
-
         $dish->delete();
         return to_route('admin.dishes.index')->with('message', "Your $dish->name deleted");
     }
