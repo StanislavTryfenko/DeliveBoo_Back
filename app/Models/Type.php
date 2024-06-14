@@ -17,7 +17,6 @@ class Type extends Model
      */
     public function restaurants(): hasMany
     {
-        //una categoria puo essere assegnata a piu ristoranti
         return $this->hasMany(Restaurant::class);
     }
 }
