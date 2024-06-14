@@ -23,8 +23,10 @@ class DatabaseSeeder extends Seeder
         ]);
         /* then */
         $this->call([
-            DishSeeder::class,
             RestaurantSeeder::class
+        ]);
+        $this->call([
+            DishSeeder::class,
         ]);
     }
 }
