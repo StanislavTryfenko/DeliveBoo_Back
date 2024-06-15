@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Restaurant extends Model
@@ -23,10 +24,10 @@ class Restaurant extends Model
     /**
      * Get the type that owns the Restaurant
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
-    public function type(): BelongsTo
+    public function types(): belongsToMany
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsToMany(Type::class);
     }
 }

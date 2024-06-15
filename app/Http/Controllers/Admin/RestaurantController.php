@@ -65,10 +65,10 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::create($validated);
 
         if ($request->has('typeList')) { 
-            $restaurant->type()->attach($validated['typeList']); 
+            $restaurant->types()->attach($validated['typeList']); 
         }
 
-        
+        //dd($restaurant->types());
 
         return to_route('admin.restaurants.index')->with('message', 'Restaurant added with Success!');
     }
@@ -87,7 +87,8 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        return view('admin.restaurants.edit', compact('restaurant'));
+        $typeList = Type::all();
+        return view('admin.restaurants.edit', compact('restaurant','typeList'));
     }
 
     /**
@@ -119,9 +120,19 @@ class RestaurantController extends Controller
             $thumb = Storage::put('uploads', $validated['thumb']);
             $validated['thumb'] = $thumb;
         }
+
+        if ($request->has('typeList')) { 
+
+            $restaurant->types()->sync($validated['typeList']); 
+        } else {
+            $restaurant->types()->sync([]);
+        }
+
         //dd($validated);
         $restaurant->update($validated);
-        return to_route('dashboard', $restaurant)->with('message', "Your $restaurant->title Updated");
+
+
+        return to_route('admin.restaurants.index', $restaurant)->with('message', "Your $restaurant->title Updated");
     }
 
     /**

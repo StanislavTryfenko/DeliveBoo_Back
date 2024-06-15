@@ -27,9 +27,13 @@ class RestaurantSeeder extends Seeder
             $restaurant->address = $faker->address;
             $restaurant->phone_number = $faker->phoneNumber();
             $restaurant->user_id = $i + 1;
-            $randomType = $types->random();
-            $restaurant->type_id = $randomType->id;
             $restaurant->save();
+        }
+
+        $types_array = range(1, 6);
+
+        foreach (Restaurant::all() as $restaurant) {
+            $restaurant->types()->attach($faker->randomElements($types_array, null));
         }
     }
 }

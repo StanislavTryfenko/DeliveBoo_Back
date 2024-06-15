@@ -104,9 +104,15 @@
                                                 <label class="form-check-label"
                                                     for="type-{{ $type->id }}">{{ $type->name }} </label>
                                             </div>
-                                        @endforeach
+                                        @endforeach                              
                                     </div>
+                                    <small id="name" class="form-text text-muted">add your restaurant's types</small>
+                                    @error('typeList')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
+
+
                                 <div class="my-2">
                                     <label for="vat" class="form-label">Vat</label>
                                     <input type="text" class="form-control @error('vat') is-invalid @enderror"
@@ -116,6 +122,7 @@
                                     @error('vat')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
+                                
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
@@ -127,6 +134,9 @@
                             <div class="h2">{{ $restaurant->logo }}</div>
                             <div class="h2">{{ $restaurant->thumb }}</div>
                             <div class="h2">{{ $restaurant->vat }}</div>
+                            @foreach ($restaurant->types as $type)
+                               <div> {{$type->name}}</div>
+                            @endforeach
 
                             <a href="{{ route('admin.restaurants.edit', $restaurant) }}"><button
                                     class="btn btn-primary">Edit Restaurant</button></a>

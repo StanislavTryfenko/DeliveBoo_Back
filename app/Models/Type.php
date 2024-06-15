@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\belongsToMany;
 
 class Type extends Model
 {
@@ -13,11 +13,11 @@ class Type extends Model
     /**
      * Get all of the restaurants for the Type
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
-    public function restaurants(): hasMany
+    public function restaurants(): belongsToMany
     {
-        return $this->hasMany(Restaurant::class);
+        return $this->belongsToMany(Restaurant::class);
     }
 }
 
