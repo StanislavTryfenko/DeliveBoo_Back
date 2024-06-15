@@ -1,1 +1,10 @@
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+@import '_variables.scss';
+
+#my_aside {
+	height: 94vh;
+}
+
+#my_header {
+	height: 6vh;
+}

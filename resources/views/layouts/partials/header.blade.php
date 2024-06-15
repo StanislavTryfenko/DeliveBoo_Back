@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm px-5">
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" id="my_header">
+	<div class="container collapse navbar-collapse" id="navbarSupportedContent">
 		<!-- Left Side Of Navbar -->
 		<ul class="navbar-nav me-auto">
 			<li class="nav-item">
