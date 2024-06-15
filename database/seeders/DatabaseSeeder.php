@@ -16,17 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        /* first create users and types for dependency reasons */
+
         $this->call([
             UsersSeeder::class,
-            TypeSeeder::class
-        ]);
-        /* then */
-        $this->call([
-            RestaurantSeeder::class
-        ]);
-        $this->call([
+            TypeSeeder::class,
+            RestaurantSeeder::class,      
             DishSeeder::class,
-        ]);
+        ]);    
     }
 }

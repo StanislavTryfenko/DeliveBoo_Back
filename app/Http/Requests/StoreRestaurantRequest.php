@@ -30,6 +30,7 @@ class StoreRestaurantRequest extends FormRequest
             'logo' => 'image|mimes:png,jpg|max:2048', //laravel prova ad aprire il file,leggerlo e capire l'estensione tramite mimes
             'thumb' => 'image|mimes:png,jpg|max:2048',
             'vat' => 'required|numeric|max_digits:11|min_digits:11',
+            'typeList' =>'required|exists:types,id',
         ];
     }
 }
