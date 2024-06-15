@@ -9,7 +9,7 @@
         <div class="my-2">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-            value="{{ old('name', $restaurant->name) }}" placeholder="es.Locanda Team 6">
+                value="{{ old('name', $restaurant->name) }}" placeholder="es.Locanda Team 6">
             <small id="name" class="form-text text-muted">type here the name of your business</small>
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -19,7 +19,7 @@
         <div class="my-2">
             <label for="address" class="form-label">Address</label>
             <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address"
-                value="{{ old('address',$restaurant->address) }}" placeholder="es.Via Italia n* 6">
+                value="{{ old('address', $restaurant->address) }}" placeholder="es.Via Italia n* 6">
             <small id="name" class="form-text text-muted">type here the full address of your business</small>
             @error('address')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -29,7 +29,8 @@
         <div class="my-2">
             <label for="phone_number" class="form-label">Phone number</label>
             <input type="tel" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number"
-                name="phone_number" value="{{ old('phone_number',$restaurant->phone_number) }}" placeholder="es.333 456 7810">
+                name="phone_number" value="{{ old('phone_number', $restaurant->phone_number) }}"
+                placeholder="es.333 456 7810">
             <small id="name" class="form-text text-muted">type here the phone number of your business</small>
             @error('phone_number')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -40,7 +41,8 @@
         <div class="my-2">
             <label for="contact_email" class="form-label">Contact email</label>
             <input type="text" class="form-control @error('contact_email') is-invalid @enderror" id="contact_email"
-                name="contact_email" value="{{ old('contact_email',$restaurant->contact_email) }}" placeholder="es.example@gmail.com">
+                name="contact_email" value="{{ old('contact_email', $restaurant->contact_email) }}"
+                placeholder="es.example@gmail.com">
             <small id="name" class="form-text text-muted">type here the contact email of your business</small>
             @error('contact_email')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -48,6 +50,9 @@
         </div>
 
         <div class="my-2">
+            @if ($restaurant->logo)
+                <img width="140" src="{{ asset('storage/' . $restaurant->logo) }}" alt="{{ $restaurant->name }}">
+            @endif
             <label for="logo" class="form-label">Logo</label>
             <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" name="logo">
             <small id="name" class="form-text text-muted">add your logo image</small>
@@ -57,6 +62,9 @@
         </div>
 
         <div class="my-2">
+            @if ($restaurant->thumb)
+                <img width="140" src="{{ asset('storage/' . $restaurant->thumb) }}" alt="{{ $restaurant->name }}">
+            @endif
             <label for="thumb" class="form-label">Thumb</label>
             <input type="file" class="form-control @error('thumb') is-invalid @enderror" id="thumb" name="thumb">
             <small id="name" class="form-text text-muted">add an image that rapresent your business</small>
@@ -98,7 +106,7 @@
         <div class="my-2">
             <label for="vat" class="form-label">Vat</label>
             <input type="text" class="form-control @error('vat') is-invalid @enderror" id="vat" name="vat"
-                value="{{ old('vat',$restaurant->vat) }}" placeholder="es.11111111111">
+                value="{{ old('vat', $restaurant->vat) }}" placeholder="es.11111111111">
             <small id="name" class="form-text text-muted">type here your VAT number</small>
             @error('vat')
                 <div class="alert alert-danger">{{ $message }}</div>

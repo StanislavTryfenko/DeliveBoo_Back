@@ -76,6 +76,7 @@
                                     <label for="logo" class="form-label">Logo</label>
                                     <input type="file" class="form-control @error('logo') is-invalid @enderror"
                                         id="logo" name="logo">
+                                        
                                     <small id="name" class="form-text text-muted">add your logo image</small>
                                     @error('logo')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -127,17 +128,17 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         @else
+                            <img src="{{asset('storage/'. $restaurant->logo)}}" alt="" width="100px">
+                            
+                            <img src="{{asset('storage/'. $restaurant->thumb)}}" alt=""  width="100px">
                             <div class="h2">{{ $restaurant->name }}</div>
                             <div class="h2">{{ $restaurant->address }}</div>
                             <div class="h2">{{ $restaurant->phone_number }}</div>
-                            <div class="h2">{{ $restaurant->contact_email }}</div>
-                            <div class="h2">{{ $restaurant->logo }}</div>
-                            <div class="h2">{{ $restaurant->thumb }}</div>
+                            <div class="h2">{{ $restaurant->contact_email }}</div>                      
                             <div class="h2">{{ $restaurant->vat }}</div>
                             @foreach ($restaurant->types as $type)
                                <div> {{$type->name}}</div>
                             @endforeach
-
                             <a href="{{ route('admin.restaurants.edit', $restaurant) }}"><button
                                     class="btn btn-primary">Edit Restaurant</button></a>
                             <form action="{{ route('admin.restaurants.destroy', $restaurant) }}" method="post">

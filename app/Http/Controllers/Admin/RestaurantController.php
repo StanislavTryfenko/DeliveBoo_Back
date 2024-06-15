@@ -151,4 +151,6 @@ class RestaurantController extends Controller
         $restaurant->delete();
         return to_route('dashboard')->with('message', "Your $restaurant->title deleted");
     }
+
+    
 }
