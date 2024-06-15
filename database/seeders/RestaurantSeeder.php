@@ -23,9 +23,9 @@ class RestaurantSeeder extends Seeder
             $restaurant->name = $faker->words(4, true);
             $restaurant->slug = Str::of($restaurant->name)->slug('-');
             $restaurant->contact_email = $faker->safeEmail();
-            $restaurant->vat = $faker->numerify('##########');
+            $restaurant->vat = $faker->numerify('###########');
             $restaurant->address = $faker->address;
-            $restaurant->phone_number = $faker->phoneNumber();
+            $restaurant->phone_number = $faker->numerify('##########');
             $restaurant->user_id = $i + 1;
             $restaurant->save();
         }
