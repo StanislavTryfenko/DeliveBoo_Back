@@ -70,16 +70,19 @@ class DishController extends Controller
     {
         $validated = $request->validated();
 
-        $slug = Str::slug($request->title, '-');
+        $slug = Str::slug($request->name, '-');
         $validated['slug'] = $slug;
 
         if ($request->has('image')) {
+            if ($dish->image) {
+                Storage::delete($dish->image);
+            }
             $image = Storage::put('uploads', $validated['image']);
             $validated['image'] = $image;
         }
 
         $dish->update($validated);
-        return to_route('admin.dishes.index')->with('message', "Change with Success!");
+        return to_route('admin.dishes.index')->with('message', "Piatto modificato con successo");
     }
 
     /**

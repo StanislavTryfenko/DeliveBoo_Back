@@ -22,7 +22,11 @@ class StoreDishRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:100',
+            'price' => 'required|numeric|min:0',
+            'image' => 'nullable|image',
+            'description' => 'nullable|string|max:255',
+            'visible' => 'required|boolean'
         ];
     }
 }
