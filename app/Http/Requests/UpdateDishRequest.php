@@ -13,6 +13,13 @@ class UpdateDishRequest extends FormRequest
     {
         return true;
     }
+    protected function prepareForValidation()
+    {
+        /* needed to accept any value for the 'visible' checkbox */
+        $this->merge([
+            'visible' => $this->input('visible', 0),
+        ]);
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,7 +29,11 @@ class UpdateDishRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:100',
+            'price' => 'required|numeric|min:0',
+            'image' => 'nullable|image',
+            'description' => 'nullable|string|max:255',
+            'visible' => 'required|boolean'
         ];
     }
 }
