@@ -95,6 +95,6 @@ class DishController extends Controller
         }
 
         $dish->delete();
-        return to_route('admin.dishes.index')->with('message', "Your $dish->name deleted");
+        return to_route('admin.dishes.index')->with('message', "$dish->name rimosso dal menu");
     }
 }
