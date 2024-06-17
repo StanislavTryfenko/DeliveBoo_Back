@@ -1,12 +1,32 @@
 @import '~bootstrap/scss/bootstrap';
 @import '_variables.scss';
 
-#my_aside {
-	height: 94vh;
+
+#my_app {
+	max-width: 100%;
+	overflow-x: hidden;
 }
 
 #my_header {
+	width: 100vw;
 	height: 6vh;
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+}
+
+#my_aside {
+	height: 94vh;
+	width: calc((100% / 12)*2);
+	position: fixed;
+	z-index: 999;
+	top: 6vh;
+	left: 0;
+}
+
+#main_section {
+	padding-top: 6vh;
 }
 
 /* restaurant */

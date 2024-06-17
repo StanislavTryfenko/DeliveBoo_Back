@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-  <div class="container-fluid p-2">
+  <div class="container-fluid p-4">
     <div class="row">
       <div class="col-12">
         <h2>Il tuo Menu</h2>
@@ -14,13 +14,12 @@
       </div>
 
       <div class="table-responsive" id="my_table">
-        <table class="table">
-          <thead class="table-light">
+        <table class="table table-striped table-hover">
+          <thead>
             <tr>
               {{-- <th scope="col">#</th> --}}
               <th scope="col" class="border-0">Immagine</th>
               <th scope="col">Nome</th>
-
               <th scope="col">Descrizione</th>
               <th scope="col">Prezzo</th>
               <th scope="col">Visibile</th>
