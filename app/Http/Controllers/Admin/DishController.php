@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
-
+use App\Models\Type;
 class DishController extends Controller
 {
     /**
@@ -20,10 +20,16 @@ class DishController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $restaurant_id = $user->restaurant->id;
-        $dishes = Dish::where('restaurant_id', $restaurant_id)->get();
+        if (!$user->restaurant) {
+            $restaurant = $user->restaurant;
+            $typeList = Type::all();
+            return view('admin.restaurants.index',compact('restaurant','typeList'));
+        } else {
+            $restaurant_id = $user->restaurant->id;
+            $dishes = Dish::where('restaurant_id', $restaurant_id)->get();
 
-        return view('admin.dishes.index', compact('dishes'));
+            return view('admin.dishes.index', compact('dishes'));
+        }
     }
 
     /**
@@ -80,7 +86,6 @@ class DishController extends Controller
     {
         if (Gate::allows('update-dish', $dish)) {
             return view('admin.dishes.edit', compact('dish'));
-
         } else {
             abort(403, "Non autorizzato");
         }
