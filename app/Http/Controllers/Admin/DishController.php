@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Gate;
 class DishController extends Controller
 {
     /**
@@ -73,29 +73,35 @@ class DishController extends Controller
      */
     public function edit(Dish $dish)
     {
-        return view('admin.dishes.edit', compact('dish'));
+        if (! Gate::allows('update-dish', $dish)) {
+            abort(403,"Non autorizzato");
+        }
+        return view('admin.dishes.edit', compact('dish'));      
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateDishRequest $request, Dish $dish)
-    {
-        $validated = $request->validated();
+    {     
+        if ( Gate::allows('update-dish', $dish)) {
+            $validated = $request->validated();
 
-        $slug = Str::slug($request->name, '-');
-        $validated['slug'] = $slug;
+            $slug = Str::slug($request->name, '-');
+            $validated['slug'] = $slug;
 
-        if ($request->has('image')) {
-            if ($dish->image) {
-                Storage::delete($dish->image);
+            if ($request->has('image')) {
+                if ($dish->image) {
+                    Storage::delete($dish->image);
+                }
+                $image = Storage::put('uploads', $validated['image']);
+                $validated['image'] = $image;
             }
-            $image = Storage::put('uploads', $validated['image']);
-            $validated['image'] = $image;
-        }
 
-        $dish->update($validated);
-        return to_route('admin.dishes.index')->with('message', "Piatto modificato con successo");
+            $dish->update($validated);
+            return to_route('admin.dishes.index')->with('message', "Piatto modificato con successo");
+        }
+        abort(403, "Non cercare di modificare i piatti di altri ristoranti");
     }
 
     /**
