@@ -21,11 +21,10 @@ class RestaurantController extends Controller
     public function index()
     {
         $user_id = Auth::id();
-
         $user = User::find($user_id);
-
         $restaurant = $user->restaurant;
         $typeList = Type::all();
+
         return view('admin.restaurants.index', compact('restaurant', 'typeList'));
     }
 
@@ -34,7 +33,6 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-
         return view('dashboard');
     }
 
@@ -50,7 +48,7 @@ class RestaurantController extends Controller
         $slug = Str::slug($request->name, '-');
         $validated['slug'] = $slug;
 
-        $validated['user_id'] =  Auth::id();
+        $validated['user_id'] = Auth::id();
 
         if ($request->has('logo')) {
             $logo = Storage::put('uploads', $validated['logo']);
@@ -88,9 +86,9 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        if (! Gate::allows('update-restaurant', $restaurant)) {
-            abort(403,"Non autorizzato");
-        }  
+        if (!Gate::allows('update-restaurant', $restaurant)) {
+            abort(403, "Non autorizzato");
+        }
         $typeList = Type::all();
         return view('admin.restaurants.edit', compact('restaurant', 'typeList'));
     }

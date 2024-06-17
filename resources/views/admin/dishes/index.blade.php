@@ -39,7 +39,9 @@
                     <img src="https://placehold.co/50x50" alt="restaurant placeholder" class="rounded">
                   @endif
                 </td>
-                <td>{{ $dish->name }}
+                <td>
+                  {{ $dish->name }}
+                  # {{ $dish->id }}
                 </td>
                 <td>{{ $dish->description }}</td>
                 <td>€ {{ $dish->price }}</td>
