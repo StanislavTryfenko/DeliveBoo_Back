@@ -8,7 +8,7 @@ function validateDishForm() {
         return false;
     }
 
-    if (!price.match(/^\d+(\.\d{2})?$/)) {
+    if (isNaN(price) || price < 0 || price > 999.99 || price.toString().split('.')[1] && price.toString().split('.')[1].length > 2) {
         alert("Please enter a valid price");
         return false;
     }
