@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Type;
+use Illuminate\Support\Facades\Gate;
 
 class RestaurantController extends Controller
 {
@@ -87,6 +88,9 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
+        if (! Gate::allows('update-restaurant', $restaurant)) {
+            abort(403,"Non autorizzato");
+        }  
         $typeList = Type::all();
         return view('admin.restaurants.edit', compact('restaurant', 'typeList'));
     }
@@ -97,42 +101,45 @@ class RestaurantController extends Controller
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
 
-        //dd($request->all());
-        $validated = $request->validated();
+        if (Gate::allows('update-restaurant', $restaurant)) {
+            //dd($request->all());
+            $validated = $request->validated();
 
-        $slug = Str::slug($request->name, '-');
-        $validated['slug'] = $slug;
+            $slug = Str::slug($request->name, '-');
+            $validated['slug'] = $slug;
 
-        if ($request->has('logo')) {
-            if ($restaurant->logo) {
-                Storage::delete($restaurant->logo);
+            if ($request->has('logo')) {
+                if ($restaurant->logo) {
+                    Storage::delete($restaurant->logo);
+                }
+
+                $logo = Storage::put('uploads', $validated['logo']);
+                $validated['logo'] = $logo;
             }
 
-            $logo = Storage::put('uploads', $validated['logo']);
-            $validated['logo'] = $logo;
-        }
+            if ($request->has('thumb')) {
+                if ($restaurant->thumb) {
+                    Storage::delete($restaurant->thumb);
+                }
 
-        if ($request->has('thumb')) {
-            if ($restaurant->thumb) {
-                Storage::delete($restaurant->thumb);
+                $thumb = Storage::put('uploads', $validated['thumb']);
+                $validated['thumb'] = $thumb;
             }
 
-            $thumb = Storage::put('uploads', $validated['thumb']);
-            $validated['thumb'] = $thumb;
+            if ($request->has('typeList')) {
+
+                $restaurant->types()->sync($validated['typeList']);
+            } else {
+                $restaurant->types()->sync([]);
+            }
+
+            //dd($validated);
+            $restaurant->update($validated);
+
+
+            return to_route('admin.restaurants.index', $restaurant)->with('message', "Your $restaurant->title Updated");
         }
-
-        if ($request->has('typeList')) {
-
-            $restaurant->types()->sync($validated['typeList']);
-        } else {
-            $restaurant->types()->sync([]);
-        }
-
-        //dd($validated);
-        $restaurant->update($validated);
-
-
-        return to_route('admin.restaurants.index', $restaurant)->with('message', "Your $restaurant->title Updated");
+        abort(403, "Non cercare di modificare il ristorante di un altro");
     }
 
     /**
