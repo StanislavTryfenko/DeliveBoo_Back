@@ -17,7 +17,7 @@ function validateRestaurantForm() {
         return false;
     }
 
-    if (!phone_number.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
+    if (!phone_number.match(/^[0-9]{10}$/)) {
         alert("Please enter a valid phone number");
         return false;
     }

@@ -40,7 +40,7 @@
                     <label for="phone_number" class="form-label">Phone number</label>
                     <input type="tel" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number"
                         name="phone_number" value="{{ old('phone_number', $restaurant->phone_number) }}"
-                        placeholder="es.333 456 7810">
+                        placeholder="es.3334567810">
                     @error('phone_number')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
