@@ -5,7 +5,7 @@
         <h2>Modifica {{ $dish->name }}</h2>
         @include('layouts.partials.validation-messages')
 
-        <form action="{{ route('admin.dishes.update', $dish) }}" method="post" enctype="multipart/form-data">
+        <form onsubmit="return validateDishForm()" name="dishForm" action="{{ route('admin.dishes.update', $dish) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -60,5 +60,9 @@
             <button type="submit" class="btn btn-primary w-100 mt-3">Save the Changes</button>
 
         </form>
+
+        @push('scripts')
+            <script src="{{ asset('js/validations/dishForm.js') }}"></script>
+        @endpush
     </div>
 @endSection
