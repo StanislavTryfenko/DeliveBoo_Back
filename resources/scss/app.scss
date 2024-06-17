@@ -26,3 +26,24 @@
 		margin-right: 0.5rem;
 	}
 }
+
+/* dishes */
+
+#my_table {
+
+	th {
+		border: 0;
+		border-radius: 0.2rem;
+	}
+
+	td {
+		vertical-align: middle;
+	}
+
+	a,
+	button {
+		padding: 0.5rem;
+		text-decoration: none;
+		vertical-align: middle;
+	}
+}
