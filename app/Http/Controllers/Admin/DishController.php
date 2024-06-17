@@ -8,6 +8,8 @@ use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class DishController extends Controller
 {
@@ -16,7 +18,11 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::all();
+        $user_id = Auth::id();
+        $user = User::find($user_id);
+        $restaurant_id = $user->restaurant->id;
+        $dishes = Dish::where('restaurant_id', $restaurant_id)->get();
+        // dd($dishes);
         return view('admin.dishes.index', compact('dishes'));
     }
 
@@ -33,16 +39,23 @@ class DishController extends Controller
      */
     public function store(StoreDishRequest $request)
     {
+        // dd($request->all());
         $validated = $request->validated();
 
-        $slug = Str::slug($request->title, '-');
+        $slug = Str::slug($request->name, '-');
         $validated['slug'] = $slug;
+
+        $user_id = Auth::id();
+        $user = User::find($user_id);
+        $restaurant_id = $user->restaurant->id;
+        $validated['restaurant_id'] = $restaurant_id;
 
         if ($request->has('image')) {
             $image = Storage::put('uploads', $validated['image']);
             $validated['image'] = $image;
         }
 
+        // dd($validated);
         $dish = Dish::create($validated);
         return to_route('admin.dishes.index')->with('message', 'Dish added with Success!');
     }
