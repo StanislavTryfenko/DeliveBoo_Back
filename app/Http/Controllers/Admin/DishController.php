@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Type;
+
 class DishController extends Controller
 {
     /**
@@ -23,7 +24,8 @@ class DishController extends Controller
         if (!$user->restaurant) {
             $restaurant = $user->restaurant;
             $typeList = Type::all();
-            return view('admin.restaurants.index',compact('restaurant','typeList'));
+
+            return view('admin.restaurants.index', compact('restaurant', 'typeList'));
         } else {
             $restaurant_id = $user->restaurant->id;
             $dishes = Dish::where('restaurant_id', $restaurant_id)->get();

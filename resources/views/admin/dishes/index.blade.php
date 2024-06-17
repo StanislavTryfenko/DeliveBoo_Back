@@ -11,6 +11,11 @@
             <i class="fa-solid fa-plus"></i>
           </a>
         </h5>
+        @if (session('message'))
+          <div class="alert alert-success">
+            {{ session('message') }}
+          </div>
+        @endif
       </div>
 
       <div class="table-responsive" id="my_table">
@@ -22,7 +27,13 @@
               <th scope="col">Nome</th>
               <th scope="col">Descrizione</th>
               <th scope="col">Prezzo</th>
-              <th scope="col">Visibile</th>
+              <th scope="col">
+                Visibile
+                <span class="position-relative">
+                  <i class="bi bi-info-circle-fill text-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Indica se i clienti possono vedere questo prodotto sulla tua pagina e sono in grado di inserirlo nel proprio carrello"></i>
+                </span>
+              </th>
               <th scope="col">Azioni</th>
             </tr>
           </thead>
@@ -40,7 +51,6 @@
                 </td>
                 <td>
                   {{ $dish->name }}
-                  # {{ $dish->id }}
                 </td>
                 <td>{{ $dish->description }}</td>
                 <td>€ {{ $dish->price }}</td>

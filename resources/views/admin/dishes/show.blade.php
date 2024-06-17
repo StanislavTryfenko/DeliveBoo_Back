@@ -21,10 +21,17 @@
         <div class="metadata">
           <h5>Prezzo impostato</h5>
           <p>€ {{ $dish->price }}</p>
-          @if ($dish->visibility == 1)
-            <p>Attualmente visibile</p>
-          @elseif ($dish->visibility == 0)
-            <p>Attualmente non visibile
+          @if ($dish->visible == 1)
+            <p>
+              Attualmente visible
+              <span class="position-relative">
+                <i class="bi bi-info-circle-fill text-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Indica se i clienti possono vedere questo prodotto sulla tua pagina e sono in grado di inserirlo nel proprio carrello"></i>
+              </span>
+            </p>
+          @elseif ($dish->visibile == 0)
+            <p>
+              Attualmente non visibile
               <span class="position-relative">
                 <i class="bi bi-info-circle-fill text-info" data-bs-toggle="tooltip" data-bs-placement="top"
                   title="Indica se i clienti possono vedere questo prodotto sulla tua pagina e sono in grado di inserirlo nel proprio carrello"></i>
