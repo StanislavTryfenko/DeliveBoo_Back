@@ -27,7 +27,16 @@ function validateRestaurantForm() {
         return false;
     }
 
-    console.log(types.every(type => type.checked == false))
+    let atLeastOneChecked = false;
+    types.forEach(type => {
+        if(type.checked) {
+            atLeastOneChecked = true;
+        }
+    });
+    if(!atLeastOneChecked) {
+        alert("Please select at least one type");
+        return false;
+    }
 
     if (!vat.match(/^[0-9]{11}$/)) {
         alert("Please enter a valid vat");
