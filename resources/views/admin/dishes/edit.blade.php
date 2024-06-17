@@ -5,7 +5,7 @@
         <h2>Modifica {{ $dish->name }}</h2>
         @include('layouts.partials.validation-messages')
 
-        <form name="dishForm" action="{{ route('admin.dishes.update', $dish) }}" method="post" enctype="multipart/form-data">
+        <form onsubmit="return validateDishForm()" name="dishForm" action="{{ route('admin.dishes.update', $dish) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 

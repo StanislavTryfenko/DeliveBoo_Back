@@ -10,7 +10,7 @@
 
         <div class="card p-4 mb-4 bg-white shadow rounded-lg">
             <div class="table-responsive">
-                <form action="{{ route('admin.dishes.store') }}" method="post" enctype="multipart/form-data">
+                <form onsubmit="return validateDishForm()" name="dishForm" action="{{ route('admin.dishes.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name:</label>
