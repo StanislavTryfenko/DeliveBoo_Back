@@ -66,4 +66,8 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script src="{{ asset('js/validations/dishForm.js') }}"></script>
+    @endpush
 @endsection
