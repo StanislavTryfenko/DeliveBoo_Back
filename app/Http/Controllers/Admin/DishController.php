@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+
 class DishController extends Controller
 {
     /**
@@ -18,11 +19,10 @@ class DishController extends Controller
      */
     public function index()
     {
-        $user_id = Auth::id();
-        $user = User::find($user_id);
+        $user = Auth::user();
         $restaurant_id = $user->restaurant->id;
         $dishes = Dish::where('restaurant_id', $restaurant_id)->get();
-        // dd($dishes);
+
         return view('admin.dishes.index', compact('dishes'));
     }
 
@@ -39,7 +39,7 @@ class DishController extends Controller
      */
     public function store(StoreDishRequest $request)
     {
-        // dd($request->all());
+
         $validated = $request->validated();
 
         $slug = Str::slug($request->name, '-');
@@ -48,6 +48,7 @@ class DishController extends Controller
         $user_id = Auth::id();
         $user = User::find($user_id);
         $restaurant_id = $user->restaurant->id;
+
         $validated['restaurant_id'] = $restaurant_id;
 
         if ($request->has('image')) {
@@ -65,7 +66,11 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        return view('admin.dishes.show', compact('dish'));
+        if (Gate::allows('update-dish', $dish)) {
+            return view('admin.dishes.show', compact('dish'));
+        } else {
+            abort(403, "Non autorizzato");
+        }
     }
 
     /**
@@ -73,20 +78,21 @@ class DishController extends Controller
      */
     public function edit(Dish $dish)
     {
-        if (! Gate::allows('update-dish', $dish)) {
-            abort(403,"Non autorizzato");
+        if (Gate::allows('update-dish', $dish)) {
+            return view('admin.dishes.edit', compact('dish'));
+
+        } else {
+            abort(403, "Non autorizzato");
         }
-        return view('admin.dishes.edit', compact('dish'));      
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateDishRequest $request, Dish $dish)
-    {     
-        if ( Gate::allows('update-dish', $dish)) {
+    {
+        if (Gate::allows('update-dish', $dish)) {
             $validated = $request->validated();
-
             $slug = Str::slug($request->name, '-');
             $validated['slug'] = $slug;
 
@@ -97,23 +103,26 @@ class DishController extends Controller
                 $image = Storage::put('uploads', $validated['image']);
                 $validated['image'] = $image;
             }
-
             $dish->update($validated);
-            return to_route('admin.dishes.index')->with('message', "Piatto modificato con successo");
-        }
-        abort(403, "Non cercare di modificare i piatti di altri ristoranti");
-    }
 
+            return to_route('admin.dishes.index')->with('message', "Piatto modificato con successo");
+        } else {
+            abort(403, "Non cercare di modificare i piatti di altri ristoranti");
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Dish $dish)
     {
-        if ($dish->image) {
-            Storage::delete($dish->image);
+        if (Gate::allows('update-dish', $dish)) {
+            if ($dish->image) {
+                Storage::delete($dish->image);
+            }
+            $dish->delete();
+            return to_route('admin.dishes.index')->with('message', "$dish->name rimosso dal menu");
+        } else {
+            abort(403, "Non autorizzato a cancellare questo piatto");
         }
-
-        $dish->delete();
-        return to_route('admin.dishes.index')->with('message', "$dish->name rimosso dal menu");
     }
 }

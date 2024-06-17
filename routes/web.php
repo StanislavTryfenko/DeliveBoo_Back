@@ -32,15 +32,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->prefix('admin')
     ->group(function () {
 
         Route::resource('/restaurants', RestaurantController::class)->parameters(['restaurants' => 'restaurant:slug']);
-
-        Route::resource('/dishes', DishController::class)->parameters(['dishes' => 'dish:slug']);
+        Route::resource('/dishes', DishController::class);
     });
 
 require __DIR__ . '/auth.php';
