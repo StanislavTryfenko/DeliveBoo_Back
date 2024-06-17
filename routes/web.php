@@ -38,10 +38,9 @@ Route::middleware(['auth', 'verified'])
     ->prefix('admin')
     ->group(function () {
 
-        Route::resource('/restaurants', RestaurantController::class);
+        Route::resource('/restaurants', RestaurantController::class)->parameters(['restaurants' => 'restaurant:slug']);
 
-        Route::resource('/dishes', DishController::class);
-
+        Route::resource('/dishes', DishController::class)->parameters(['dishes' => 'dish:slug']);
     });
 
 require __DIR__ . '/auth.php';

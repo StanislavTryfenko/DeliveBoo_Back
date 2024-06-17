@@ -25,7 +25,7 @@ class RestaurantController extends Controller
 
         $restaurant = $user->restaurant;
         $typeList = Type::all();
-        return view('admin.restaurants.index', compact('restaurant','typeList'));
+        return view('admin.restaurants.index', compact('restaurant', 'typeList'));
     }
 
     /**
@@ -64,8 +64,8 @@ class RestaurantController extends Controller
         /* dd($validated); */
         $restaurant = Restaurant::create($validated);
 
-        if ($request->has('typeList')) { 
-            $restaurant->types()->attach($validated['typeList']); 
+        if ($request->has('typeList')) {
+            $restaurant->types()->attach($validated['typeList']);
         }
 
         //dd($restaurant->types());
@@ -88,7 +88,7 @@ class RestaurantController extends Controller
     public function edit(Restaurant $restaurant)
     {
         $typeList = Type::all();
-        return view('admin.restaurants.edit', compact('restaurant','typeList'));
+        return view('admin.restaurants.edit', compact('restaurant', 'typeList'));
     }
 
     /**
@@ -121,9 +121,9 @@ class RestaurantController extends Controller
             $validated['thumb'] = $thumb;
         }
 
-        if ($request->has('typeList')) { 
+        if ($request->has('typeList')) {
 
-            $restaurant->types()->sync($validated['typeList']); 
+            $restaurant->types()->sync($validated['typeList']);
         } else {
             $restaurant->types()->sync([]);
         }
@@ -140,7 +140,7 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-       
+
         if ($restaurant->logo) {
             Storage::delete($restaurant->logo);
         }
@@ -151,6 +151,4 @@ class RestaurantController extends Controller
         $restaurant->delete();
         return to_route('dashboard')->with('message', "Your $restaurant->title deleted");
     }
-
-    
 }
