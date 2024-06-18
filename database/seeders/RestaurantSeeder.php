@@ -20,8 +20,8 @@ class RestaurantSeeder extends Seeder
 
         for ($i = 0; $i < 5; $i++) {
             $restaurant = new Restaurant();
-            $restaurant->name = $faker->words(4, true);
-            $restaurant->slug = Str::of($restaurant->name)->slug('-');
+            $restaurant->name_restaurant = $faker->words(4, true);
+            $restaurant->slug = Str::of($restaurant->name_restaurant)->slug('-');
             $restaurant->contact_email = $faker->safeEmail();
             $restaurant->vat = $faker->numerify('###########');
             $restaurant->address = $faker->address;

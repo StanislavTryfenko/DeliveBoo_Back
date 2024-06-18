@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Restaurant extends Model
 {
     use HasFactory;
-    protected $fillable = ['contact_email', 'vat', 'name', 'slug', 'address', 'phone_number', 'logo', 'thumb', 'user_id'];
+    protected $fillable = ['contact_email', 'vat', 'name_restaurant', 'slug', 'address', 'phone_number', 'logo', 'thumb', 'user_id'];
 
     /**
      * Get the user that owns the Restaurant

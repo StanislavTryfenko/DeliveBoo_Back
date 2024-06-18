@@ -41,35 +41,7 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantRequest $request)
     {
-        //dd($request->all());
-
-        $validated = $request->validated();
-
-        $slug = Str::slug($request->name, '-');
-        $validated['slug'] = $slug;
-
-        $validated['user_id'] = Auth::id();
-
-        if ($request->has('logo')) {
-            $logo = Storage::put('uploads', $validated['logo']);
-            $validated['logo'] = $logo;
-        }
-
-        if ($request->has('thumb')) {
-            $thumb = Storage::put('uploads', $validated['thumb']);
-            $validated['thumb'] = $thumb;
-        }
-
-        /* dd($validated); */
-        $restaurant = Restaurant::create($validated);
-
-        if ($request->has('typeList')) {
-            $restaurant->types()->attach($validated['typeList']);
-        }
-
-        //dd($restaurant->types());
-
-        return to_route('admin.restaurants.index')->with('message', 'Restaurant added with Success!');
+        //
     }
 
     /**

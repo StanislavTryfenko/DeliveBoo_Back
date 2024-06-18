@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('contact_email')->nullable();
             $table->string('vat');
-            $table->string('name');
+            $table->string('name_restaurant');
             $table->string('slug');
             $table->string('address');
             $table->string('phone_number')->nullable();
