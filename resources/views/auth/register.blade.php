@@ -13,7 +13,7 @@
 
                             <div class="mb-4 row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome Utente') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -30,7 +30,7 @@
 
                             <div class="mb-4 row">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Utente') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -49,7 +49,7 @@
                             <!--nome ristorante-->
                             <div class="mb-4 row">
                                 <label for="name_restaurant"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Name restaurant') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome Ristorante') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name_restaurant" type="type"
@@ -67,7 +67,7 @@
                             <!--indirizzo-->
                             <div class="mb-4 row">
                                 <label for="address"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo Ristorante') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="address" type="type"
@@ -84,7 +84,7 @@
                             <!--vat-->
                             <div class="mb-4 row">
                                 <label for="vat"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Vat') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('P.IVA Ristorante') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="vat" type="type"
@@ -100,7 +100,7 @@
                             </div>
                             <!--types-->
                             <div class="mb-4 row">
-                                <label for="type" class="form-label">Categoria ristorante</label>
+                                <label for="type" class="form-label">{{ __('Categorie Ristorante') }}</label>
                                 <div class="d-flex gap-3">
                                     @foreach ($typeList as $type)
                                         <div class="form-check text-center ">
@@ -117,15 +117,50 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <!--Email Ristorante-->
+                            <div class="mb-4 row">
+                                <label for="contact_email"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Email Ristorante') }}</label>
 
+                                <div class="col-md-6">
+                                    <input id="contact_email" type="type"
+                                        class="form-control @error('contact_email') is-invalid @enderror"
+                                        name="contact_email" value="{{ old('contact_email') }}" required
+                                        autocomplete="contact_email">
 
+                                    @error('contact_email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
+                            <div class="mb-4 row">
+                                <label for="thumb"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Immagine Ristorante') }}</label>
+                                <div class="col-md-6">
 
+                                    <input type="file" class="form-control @error('thumb') is-invalid @enderror"
+                                        id="thumb" name="thumb">
 
+                                    @error('thumb')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
 
-
-
-
+                            <div class="mb-4 row">
+                                <label for="logo"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Logo Ristorante') }}</label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control @error('logo') is-invalid @enderror"
+                                        id="logo" name="logo">
+                                    @error('logo')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="mb-4 row">
                                 <label for="password"
@@ -146,7 +181,7 @@
 
                             <div class="mb-4 row">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
