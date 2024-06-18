@@ -175,7 +175,9 @@
                                 <div class="col-md-6">
 
                                     <input type="file" class="form-control @error('thumb') is-invalid @enderror"
-                                        id="thumb" name="thumb">
+                                        id="thumb" name="thumb" accept="image/jpg, image/png"
+                                        oninvalid="this.setCustomValidity('Inserisci un immagine valida (jpg o png).')"
+                                        oninput="setCustomValidity('')">
 
                                     @error('thumb')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -188,7 +190,9 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Logo Ristorante') }}</label>
                                 <div class="col-md-6">
                                     <input type="file" class="form-control @error('logo') is-invalid @enderror"
-                                        id="logo" name="logo">
+                                        id="logo" name="logo" accept="image/jpg, image/png"
+                                        oninvalid="this.setCustomValidity('Inserisci un immagine valida (jpg o png).')"
+                                        oninput="setCustomValidity('')">
                                     @error('logo')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
