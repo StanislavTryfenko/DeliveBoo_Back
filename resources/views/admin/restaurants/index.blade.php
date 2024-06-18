@@ -47,7 +47,6 @@
                                                 <span> {{ $type->name }};</span>
                                             @endforeach
                                         </p>
-
                                     </div>
                                 </div>
                             </div>
@@ -58,11 +57,9 @@
                                 </a>
                             </div>
                         </div>
-
+                    </div>
+                @endif
             </div>
-
         </div>
     </div>
-    </section>
-    @endif
 @endsection
