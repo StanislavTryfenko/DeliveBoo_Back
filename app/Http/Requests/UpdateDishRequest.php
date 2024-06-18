@@ -33,7 +33,7 @@ class UpdateDishRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'image' => 'nullable|image',
             'description' => 'nullable|string|max:255',
-            'visible' => 'required|boolean'
+            'visible' => 'boolean'
         ];
     }
 }
