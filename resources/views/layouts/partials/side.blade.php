@@ -3,7 +3,7 @@
 		<div class="row flex-column justify-content-around gap-3 py-5 px-3">
 
 			<div>
-				<h4>Your Restaurant</h4>
+				<h4>Il Tuo Ristorante</h4>
 			</div>
 			<div>
 				<ul class="list-unstyled lh-lg">
@@ -17,8 +17,8 @@
 							<i class="fa-solid fa-utensils"></i> Menu
 						</a>
 					</li>
-					<li>some nav voice</li>
-					<li>some nav voice</li>
+					<li>Altre Voci</li>
+					<li>Altre Voci</li>
 				</ul>
 			</div>
 

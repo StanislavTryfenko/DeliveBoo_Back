@@ -15,9 +15,10 @@ function validateRegisterForm(event) {
     const logo = document.forms['registerForm']['logo'];
     const password = document.forms['registerForm']['password'];
     const passwordCheck = document.forms['registerForm']['password-confirm'];
+ fix_code
 
-    //Checking if form is valid
-    let pushForm = false;
+    let pushForm = true;
+
 
     //name
     let nameHelp = document.getElementById('nameHelp');
@@ -102,6 +103,14 @@ function validateRegisterForm(event) {
         }
     });
     if (!atLeastOneChecked) {
+ fix_code
+        alert("Per favore seleziona almeno una Tipologia per il Tuo Ristorante");
+        pushForm = false;
+    }
+
+    if (password.value !== passwordCheck.value) {
+        alert("Le password non corrispondono!");
+
         document.getElementById('type-error').insertAdjacentHTML('afterend', ' <small id="typesHelp" class="text-danger">Devi selezionare almeno un tipo</small>');
         pushForm = false;
     }
@@ -117,6 +126,7 @@ function validateRegisterForm(event) {
         contactEmail.insertAdjacentHTML('afterend', '<small id="contactEmailHelp" class="text-danger">Devi inserire un indirizzo email di contatto</small>');
         contactEmail.classList.remove('is-valid');
         contactEmail.classList.add('is-invalid');
+ dev
         pushForm = false;
     }
 
