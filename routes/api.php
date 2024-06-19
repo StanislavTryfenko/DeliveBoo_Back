@@ -24,7 +24,8 @@ Route::get('/restaurants',[RestaurantController::class,'getAllRestaurants']);
 
 
 //restituisce il menù del singolo ristorante
-
+Route::get('/restaurants/{id}',[RestaurantController::class,'getSingleRestaurant']);
 
 
 //restituisce la query con tutte le tipologie di ristorante filtrati
+Route::get('/types',[RestaurantController::class,'filteredType']);
