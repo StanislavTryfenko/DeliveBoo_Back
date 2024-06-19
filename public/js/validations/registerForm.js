@@ -2,6 +2,7 @@
 
 function validateRegisterForm(event) {
 
+    //Getting all form elements
     const name = document.forms['registerForm']['name'];
     const email = document.forms['registerForm']['email'];
     const restaurantName = document.forms['registerForm']['name_restaurant'];
@@ -15,6 +16,7 @@ function validateRegisterForm(event) {
     const password = document.forms['registerForm']['password'];
     const passwordCheck = document.forms['registerForm']['password-confirm'];
 
+    //Checking if form is valid
     let pushForm = false;
 
     //name
@@ -135,6 +137,7 @@ function validateRegisterForm(event) {
     }
 
     //thumb
+    thumb.classList.remove('is-valid');
     if (thumb.value) {
         let thumbFormattHelp = document.getElementById('thumbFormattHelp');
         if (thumbFormattHelp) {
@@ -149,9 +152,9 @@ function validateRegisterForm(event) {
             pushForm = false;
         }
     }
-    console.log(thumb.value);
 
     //logo
+    logo.classList.remove('is-valid');
     if (logo.value) {
         let logoFormattHelp = document.getElementById('logoFormattHelp');
         if (logoFormattHelp) {
