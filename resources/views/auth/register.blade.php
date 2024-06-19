@@ -242,7 +242,7 @@
             </div>
         </div>
     </div>
-    {{-- @push('scripts')
+    @push('scripts')
         <script src="{{ asset('js/validations/registerForm.js') }}"></script>
-    @endpush --}}
+    @endpush
 @endsection
