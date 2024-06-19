@@ -96,7 +96,7 @@ function validateRegisterForm(event) {
     let atLeastOneChecked = false;
     types.forEach(type => {
         if (type.checked) {
-
+            document.getElementById('type-error').insertAdjacentElement('afterend', '<small id="typesHelp" class="text-danger">Devi selezionare almeno un tipo</small>');
             atLeastOneChecked = true;
         }
     });
