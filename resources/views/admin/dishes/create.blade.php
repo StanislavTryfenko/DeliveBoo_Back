@@ -18,6 +18,7 @@
     @enderror
     </div>
 
+
     <div class="mb-3">
       <label for="price" class="form-label"><strong>Prezzo:</strong></label>
       <input type="text" class="form-control" id="price" name="price" value="{{ old('price') }}" required>
@@ -34,6 +35,16 @@
     @enderror
     </div>
 
+      <div class="mb-3">
+        <label for="image" class="form-label">Immagine</label>
+        <input type="file" class="form-control" id="image" name="image">
+        @error('image')
+          <div class="text-danger">{{ $message }}</div>
+        @enderror
+      </div>
+
+
+
 
     <div class="mb-3">
       <label for="description" class="form-label"><strong>Descrizione:</strong></label>
@@ -42,6 +53,31 @@
       <div class="text-danger">{{ $message }}</div>
     @enderror
     </div>
+
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="price" class="form-label">Prezzo</label>
+          <input type="text" class="form-control" id="price" name="price" value="{{ old('price') }}" required>
+          @error('price')
+            <div class="text-danger">{{ $message }}</div>
+          @enderror
+        </div>
+        <div class="col-6">
+          <label for="visible" class="form-label w-100">
+            Visibile
+            <span class="position-relative">
+              <i class="bi bi-info-circle-fill text-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                title="Indica se i clienti possono vedere questo prodotto sulla tua pagina e sono in grado di inserirlo nel proprio carrello"></i>
+            </span>
+          </label>
+          <input type="checkbox" class="form-check-input" id="visible" name="visible" value="1"
+            {{ old('visible') ? 'checked' : '' }} style="width:2rem; height: 2rem;">
+          @error('visible')
+            <div class="text-danger">{{ $message }}</div>
+          @enderror
+        </div>
+      </div>
+
 
     <div class="mb-3 col">
       <label for="visible" class="form-label w-100">
