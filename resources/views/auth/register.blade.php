@@ -119,10 +119,13 @@
                                             </label>
                                         </div>
                                     @endforeach
+                                    @error('typeList')
+                                        <span>
+                                            <strong class="text-danger"
+                                                style="font-size: 0.875em;">{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                @error('typeList')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
                             </div>
 
                             <!--Email Ristorante-->
@@ -239,7 +242,7 @@
             </div>
         </div>
     </div>
-    @push('scripts')
+    {{-- @push('scripts')
         <script src="{{ asset('js/validations/registerForm.js') }}"></script>
-    @endpush
+    @endpush --}}
 @endsection

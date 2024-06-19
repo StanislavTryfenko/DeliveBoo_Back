@@ -16,6 +16,7 @@ function validateRegisterForm(event) {
     const password = document.forms['registerForm']['password'];
     const passwordCheck = document.forms['registerForm']['password-confirm'];
 
+
     let pushForm = true;
 
     //name
@@ -118,7 +119,7 @@ function validateRegisterForm(event) {
         contactEmail.classList.remove('is-invalid');
     }
     contactEmail.classList.add('is-valid');
-    if (!contactEmail.value || !contactEmail.value('@') || !contactEmail.value('.')) {
+    if (!contactEmail.value || !contactEmail.value.includes('@') || !contactEmail.value.includes('.')) {
         contactEmail.insertAdjacentHTML('afterend', '<small id="contactEmailHelp" class="text-danger">Devi inserire un indirizzo email di contatto</small>');
         contactEmail.classList.remove('is-valid');
         contactEmail.classList.add('is-invalid');
@@ -231,11 +232,12 @@ function validateRegisterForm(event) {
         pushForm = false;
     }
 
+
     event.preventDefault(event);
     //form validation !important: this must be the last validation
     if (pushForm === false) {
         event.preventDefault(event);
     } else {
-        return true;
+        return pushForm;
     }
 }
