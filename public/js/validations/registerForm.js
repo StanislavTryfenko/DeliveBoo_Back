@@ -96,7 +96,7 @@ function validateRegisterForm(event) {
     let atLeastOneChecked = false;
     types.forEach(type => {
         if (type.checked) {
-            document.getElementById('type-error').insertAdjacentElement('afterend', '<small id="typesHelp" class="text-danger">Devi selezionare almeno un tipo</small>');
+            document.getElementById('type-error').insertAdjacentHTML('afterend', '<small id="typesHelp" class="text-danger">Devi selezionare almeno un tipo</small>');
             atLeastOneChecked = true;
         }
     });
@@ -232,6 +232,7 @@ function validateRegisterForm(event) {
         pushForm = false;
     }
 
+    event.preventDefault(event);
     //form validation !important: this must be the last validation
     if (pushForm === false) {
         event.preventDefault(event);
