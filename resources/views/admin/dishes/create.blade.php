@@ -44,7 +44,7 @@
 
       <div class="mb-3 col">
         <label for="visible" class="form-label w-100">
-          Disponibile
+          Visibile
           <span class="position-relative">
             <i class="bi bi-info-circle-fill text-info" data-bs-toggle="tooltip" data-bs-placement="top"
               title="Indica se i clienti possono vedere questo prodotto sulla tua pagina e sono in grado di inserirlo nel proprio carrello"></i>
