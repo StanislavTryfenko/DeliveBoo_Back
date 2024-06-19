@@ -9,22 +9,20 @@ use App\Models\Type;
 
 class RestaurantController extends Controller
 {
-    public function getAllRestaurants()
+    public function index()
     {
-        $allRestaurants = Restaurant::with('types', 'dishes')->orderByDesc('id')->paginate(9);
+        $restaurants = Restaurant::with('types', 'dishes')->orderByDesc('id')->paginate(9);
         $types = Type::all();
 
         return response()->json([
             "success" => true,
-            "response" => $allRestaurants,
+            "restaurants" => $restaurants,
             "types" => $types,
         ]);
     }
 
     public function getSingleRestaurant($id)
     {
-
-
         $restaurant = Restaurant::with('types', 'dishes')->where('id', $id)->first();
 
         if ($restaurant) {
@@ -42,6 +40,6 @@ class RestaurantController extends Controller
 
     public function filteredType(Request $request)
     {
-      //
+        //
     }
 }
