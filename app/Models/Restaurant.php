@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Restaurant extends Model
 {
@@ -29,5 +30,10 @@ class Restaurant extends Model
     public function types(): belongsToMany
     {
         return $this->belongsToMany(Type::class);
+    }
+
+    public function dishes():HasMany
+    {
+        return $this->hasMany(Dish::class);
     }
 }
