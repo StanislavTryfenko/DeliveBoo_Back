@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
             'name_restaurant' => 'required|min:4|max:255',
             'contact_email' => 'required|email|max:255|unique:restaurants,contact_email',
             'address' => 'required|min:4|max:255',
-            'phone_number' => 'numeric|max_digits:20|min_digits:3',
+            'phone_number' => 'nullable|numeric|max_digits:20|min_digits:3',
             'logo' => 'image|mimes:png,jpg|max:2048',
             'thumb' => 'image|mimes:png,jpg|max:2048',
             'vat' => 'required|numeric|max_digits:11|min_digits:11',
