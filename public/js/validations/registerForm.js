@@ -5,21 +5,21 @@ function validateRegisterForm() {
     const passwordCheck = document.forms['registerForm']['password-confirm'];
 
 
-    let pushForm = false;
+    let pushForm = true;
 
     let atLeastOneChecked = false;
     types.forEach(type => {
-        if(type.checked) {
+        if (type.checked) {
             atLeastOneChecked = true;
         }
     });
-    if(!atLeastOneChecked) {
-        alert("Please select at least one type");
+    if (!atLeastOneChecked) {
+        alert("Per favore seleziona almeno una Tipologia per il Tuo Ristorante");
         pushForm = false;
     }
 
-    if(password.value !== passwordCheck.value) {
-        alert("Passwords do not match");
+    if (password.value !== passwordCheck.value) {
+        alert("Le password non corrispondono!");
         pushForm = false;
     }
 

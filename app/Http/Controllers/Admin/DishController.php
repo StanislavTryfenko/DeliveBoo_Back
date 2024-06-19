@@ -66,7 +66,7 @@ class DishController extends Controller
 
         // dd($validated);
         $dish = Dish::create($validated);
-        return to_route('admin.dishes.index')->with('message', 'Dish added with Success!');
+        return to_route('admin.dishes.index')->with('message', "Il Piatto: $dish->name è stato aggiuto con Successo!");
     }
 
     /**
@@ -112,7 +112,7 @@ class DishController extends Controller
             }
             $dish->update($validated);
 
-            return to_route('admin.dishes.index')->with('message', "Piatto modificato con successo");
+            return to_route('admin.dishes.index')->with('message', "$dish->name è stato modificato con successo!");
         } else {
             abort(403, "Non cercare di modificare i piatti di altri ristoranti");
         }
@@ -127,7 +127,7 @@ class DishController extends Controller
                 Storage::delete($dish->image);
             }
             $dish->delete();
-            return to_route('admin.dishes.index')->with('message', "$dish->name rimosso dal menu");
+            return to_route('admin.dishes.index')->with('message', "$dish->name è stato rimosso dal menu.");
         } else {
             abort(403, "Non autorizzato a cancellare questo piatto");
         }

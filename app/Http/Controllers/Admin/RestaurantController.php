@@ -70,7 +70,7 @@ class RestaurantController extends Controller
      */
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
-
+        /*
         if (Gate::allows('update-restaurant', $restaurant)) {
             //dd($request->all());
             $validated = $request->validated();
@@ -107,9 +107,10 @@ class RestaurantController extends Controller
             $restaurant->update($validated);
 
 
-            return to_route('admin.restaurants.index', $restaurant)->with('message', "Your $restaurant->title Updated");
+            return to_route('admin.restaurants.index', $restaurant)->with('message', "Il Ristorante: $restaurant->title è stato aggiornato");
         }
         abort(403, "Non cercare di modificare il ristorante di un altro");
+        */
     }
 
     /**
