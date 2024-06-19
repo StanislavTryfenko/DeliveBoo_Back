@@ -9,7 +9,7 @@
 
                     <div class="card-body">
                         <form method="post" action="{{ route('register') }}" enctype="multipart/form-data" name="registerForm"
-                            onsubmit="validateRegisterForm(event)">
+                            onsubmit="return validateRegisterForm(event)">
                             @csrf
 
                             <!--name-->
@@ -124,6 +124,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+
                             <!--Email Ristorante-->
                             <div class="mb-4 row">
                                 <label for="contact_email"
