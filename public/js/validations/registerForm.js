@@ -118,7 +118,7 @@ function validateRegisterForm(event) {
         contactEmail.classList.remove('is-invalid');
     }
     contactEmail.classList.add('is-valid');
-    if (!contactEmail.value) {
+    if (!contactEmail.value || !contactEmail.value('@') || !contactEmail.value('.')) {
         contactEmail.insertAdjacentHTML('afterend', '<small id="contactEmailHelp" class="text-danger">Devi inserire un indirizzo email di contatto</small>');
         contactEmail.classList.remove('is-valid');
         contactEmail.classList.add('is-invalid');

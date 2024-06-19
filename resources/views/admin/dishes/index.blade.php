@@ -34,17 +34,16 @@
                             {{-- <th scope="col">#</th> --}}
                             <th scope="col" class="border-0">Immagine</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">Descrizione</th>
                             <th scope="col">Prezzo</th>
-                            <th scope="col">
-                                Visibile
+                            <th class="text-center" scope="col">
+                                Disponibile
                                 <span class="position-relative">
                                     <i class="bi bi-info-circle-fill text-info" data-bs-toggle="tooltip"
                                         data-bs-placement="top"
                                         title="Indica se i clienti possono vedere questo prodotto sulla tua pagina e sono in grado di inserirlo nel proprio carrello"></i>
                                 </span>
                             </th>
-                            <th scope="col">Azioni</th>
+                            <th class="text-center" scope="col">Azioni</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,13 +63,10 @@
                                     <td>
                                         {{ $dish->name }}
                                     </td>
-                                    <td>{{ $dish->description }}</td>
                                     <td>€ {{ $dish->price }}</td>
-                                    <td><input type="checkbox" disabled {{ $dish->visible ? 'checked' : '' }}></td>
-                                    <td>
-                                        <a href="{{ route('admin.dishes.show', $dish) }}">
-                                            <i class="fa-regular fa-eye"></i>
-                                        </a>
+                                    <td class="text-center"><input type="checkbox" disabled
+                                            {{ $dish->visible ? 'checked' : '' }}></td>
+                                    <td class="text-center">
                                         <a href="{{ route('admin.dishes.edit', $dish) }}">
                                             <i class="fa-solid fa-pencil"></i>
                                         </a>

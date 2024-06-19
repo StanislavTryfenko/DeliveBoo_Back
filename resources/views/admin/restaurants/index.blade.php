@@ -43,16 +43,6 @@
                             </div>
                         </div>
 
-                        {{-- edit --}}
-
-                        <!--
-                            <div class="col-auto p-4 text-end">
-                                <a href="{{ route('admin.restaurants.edit', $restaurant) }}">
-                                    <i class="fa-solid fa-pen"></i>
-                                </a>
-                            </div>
-                        -->
-
                     </div>
                 </div>
             </div>

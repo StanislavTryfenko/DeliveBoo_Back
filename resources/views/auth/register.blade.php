@@ -111,7 +111,7 @@
 
                                     @foreach ($typeList as $type)
                                         <div id="{{ $loop->last ? 'type-error' : '' }}" class="form-check text-center">
-                                            <input  name="typeList[]" class="form-check-input " type="checkbox"
+                                            <input name="typeList[]" class="form-check-input " type="checkbox"
                                                 value="{{ $type->id }}" id="type-{{ $type->id }}"
                                                 {{ in_array($type->id, old('typeList', [])) ? 'checked' : '' }} />
                                             <label class="form-check-label"
@@ -151,8 +151,8 @@
 
                                 <div class="col-md-6">
                                     <input id="phone_number" type="tel"
-                                        class="form-control @error('phone_number') is-invalid @enderror"
-                                        name="phone_number" value="{{ old('phone_number') }}">
+                                        class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
+                                        value="{{ old('phone_number') }}">
 
                                     @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
