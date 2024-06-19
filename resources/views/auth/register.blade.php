@@ -113,7 +113,7 @@
                             </div>
                             <!--types-->
                             <div class="mb-4 row">
-                                <label for="type" class="form-label">{{ __('Categorie Ristorante *') }}</label>
+                                <label class="form-label">{{ __('Categorie Ristorante *') }}</label>
                                 <div class="d-flex gap-3">
                                     @foreach ($typeList as $type)
                                         <div class="form-check text-center">
@@ -172,6 +172,7 @@
                             <div class="mb-4 row">
                                 <label for="thumb"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Immagine Ristorante') }}</label>
+
                                 <div class="col-md-6">
 
                                     <input type="file" class="form-control @error('thumb') is-invalid @enderror"
@@ -188,6 +189,7 @@
                             <div class="mb-4 row">
                                 <label for="logo"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Logo Ristorante') }}</label>
+
                                 <div class="col-md-6">
                                     <input type="file" class="form-control @error('logo') is-invalid @enderror"
                                         id="logo" name="logo" accept="image/jpg, image/png"

@@ -6,23 +6,28 @@ function validateRegisterForm() {
 
 
     let pushForm = false;
-
     let atLeastOneChecked = false;
+    let passwordChecked = false;
+
     types.forEach(type => {
         if(type.checked) {
             atLeastOneChecked = true;
         }
     });
+
     if(!atLeastOneChecked) {
-        alert("Please select at least one type");
-        pushForm = false;
+        alert("Please select at least one type");      
     }
 
     if(password.value !== passwordCheck.value) {
+        passwordChecked = false;
         alert("Passwords do not match");
-        pushForm = false;
     }
 
+    if (atLeastOneChecked && passwordCheck){
+        pushForm=true;
+    } 
+    
     return pushForm;
 
 }
