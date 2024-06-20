@@ -47,7 +47,40 @@
                                     @enderror
                                 </div>
                             </div>
+                            
+                            {{-- Password --}}
+                            <div class="mb-4 row">
+                                <label for="password"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
 
+                                <div class="col-md-6">
+                                    <input id="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- Conferma Password --}}
+                            <div class="mb-4 row">
+                                <label for="password-confirm"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password *') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="password-confirm" type="password" class="form-control"
+                                        name="password_confirmation">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <!--nome ristorante-->
                             <div class="mb-4 row">
@@ -56,7 +89,7 @@
 
                                 <div class="col-md-6">
                                     <input id="name_restaurant" type="type"
-                                        class="form-control @error('name_restaurant') is-invalid @enderror"
+                                    class="form-control @error('name_restaurant') is-invalid @enderror"
                                         name="name_restaurant" value="{{ old('name_restaurant') }}">
 
                                     @error('name_restaurant')
@@ -85,49 +118,6 @@
                                 </div>
                             </div>
 
-                            <!--vat-->
-                            <div class="mb-4 row">
-                                <label for="vat"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('P.IVA Ristorante *') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="vat" type="text"
-                                        class="form-control @error('vat') is-invalid @enderror" name="vat"
-                                        value="{{ old('vat') }}">
-
-                                    @error('vat')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <!--types-->
-                            <div class="mb-4 row">
-                                <label class="form-label col-md-4">{{ __('Categorie Ristorante *') }}</label>
-
-                                <div class="d-flex flex-wrap gap-3 col-md-6">
-
-                                    @foreach ($typeList as $type)
-                                        <div id="{{ $loop->last ? 'type-error' : '' }}" class="form-check text-center">
-                                            <input name="typeList[]" class="form-check-input " type="checkbox"
-                                                value="{{ $type->id }}" id="type-{{ $type->id }}"
-                                                {{ in_array($type->id, old('typeList', [])) ? 'checked' : '' }} />
-                                            <label class="form-check-label"
-                                                for="type-{{ $type->id }}">{{ $type->name }}
-                                            </label>
-                                        </div>
-                                    @endforeach
-                                    @error('typeList')
-                                        <span>
-                                            <strong class="text-danger"
-                                                style="font-size: 0.875em;">{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
                             <!--Email Ristorante-->
                             <div class="mb-4 row">
                                 <label for="contact_email"
@@ -146,7 +136,24 @@
                                 </div>
                             </div>
 
+                            <!--vat-->
+                            <div class="mb-4 row">
+                                <label for="vat"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('P.IVA Ristorante *') }}</label>
 
+                                <div class="col-md-6">
+                                    <input id="vat" type="text"
+                                        class="form-control @error('vat') is-invalid @enderror" name="vat"
+                                        value="{{ old('vat') }}">
+
+                                    @error('vat')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
                             <!--phone number-->
                             <div class="mb-4 row">
                                 <label for="phone_number"
@@ -194,36 +201,27 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            {{-- Password --}}
+                            
+                            <!--types-->
                             <div class="mb-4 row">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            {{-- Conferma Password --}}
-                            <div class="mb-4 row">
-                                <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password *') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                <label class="form-label col-md-4">{{ __('Categorie Ristorante *') }}</label>
+                            
+                                <div class="d-flex flex-wrap gap-3 col-md-6">
+                            
+                                    @foreach ($typeList as $type)
+                                        <div id="{{ $loop->last ? 'type-error' : '' }}" class="form-check text-center">
+                                            <input name="typeList[]" class="form-check-input " type="checkbox"
+                                                value="{{ $type->id }}" id="type-{{ $type->id }}"
+                                                {{ in_array($type->id, old('typeList', [])) ? 'checked' : '' }} />
+                                            <label class="form-check-label"
+                                                for="type-{{ $type->id }}">{{ $type->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                    @error('typeList')
+                                        <span>
+                                            <strong class="text-danger"
+                                                style="font-size: 0.875em;">{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>

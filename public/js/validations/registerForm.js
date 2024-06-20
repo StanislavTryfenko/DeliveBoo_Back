@@ -1,7 +1,4 @@
-//VALUTARE SE METTERE GLI ERRORI FRONT IN BOLD
-
 function validateRegisterForm(event) {
-
     //Getting all form elements
     const name = document.forms['registerForm']['name'];
     const email = document.forms['registerForm']['email'];
@@ -15,7 +12,6 @@ function validateRegisterForm(event) {
     const logo = document.forms['registerForm']['logo'];
     const password = document.forms['registerForm']['password'];
     const passwordCheck = document.forms['registerForm']['password-confirm'];
-
 
     let pushForm = true;
 
@@ -232,9 +228,9 @@ function validateRegisterForm(event) {
         pushForm = false;
     }
 
-
-    // console.log(pushForm);
+    // debug mode
     // event.preventDefault(event);
+
     //form validation !important: this must be the last validation
     if (pushForm === false) {
         event.preventDefault(event);

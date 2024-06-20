@@ -9,7 +9,7 @@
 
             @include('layouts.partials.validation-messages')
 
-            <form onsubmit="return validateDishForm()" name="dishForm" action="{{ route('admin.dishes.update', $dish) }}"
+            <form onsubmit="return validateDishForm(event)" name="dishForm" action="{{ route('admin.dishes.update', $dish) }}"
                 method="post" enctype="multipart/form-data" class="w-50">
                 @csrf
                 @method('PUT')
@@ -17,7 +17,7 @@
                 <div class="mb-3">
                     <label for="name" class="form-label"><strong>Nome:</strong></label>
                     <input type="text" class="form-control" id="name" name="name"
-                        value="{{ old('name', $dish->name) }}" required>
+                        value="{{ old('name', $dish->name) }}">
                     @error('name')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -42,10 +42,10 @@
                 <div class="row mb-3">
                     <div class="col-6">
                         <label for="price" class="form-label"><strong>Prezzo:</strong></label>
-                        <div class="input-group">
-                            <span class="input-group-text">€</span>
+                        <div class="input-group has-validation">
+                            <span id="€" class="input-group-text" style="margin-right: -3px">€</span>
                             <input type="text" class="form-control" id="price" aria-label="amount" name="price"
-                                value="{{ old('price', $dish->price) }}" required>
+                                value="{{ old('price', $dish->price) }}">
                         </div>
                         @error('price')
                             <div class="text-danger">{{ $message }}</div>
