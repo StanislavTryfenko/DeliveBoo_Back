@@ -233,11 +233,12 @@ function validateRegisterForm(event) {
     }
 
 
-    event.preventDefault(event);
+    // console.log(pushForm);
+    // event.preventDefault(event);
     //form validation !important: this must be the last validation
     if (pushForm === false) {
         event.preventDefault(event);
     } else {
-        return pushForm;
+        return true;
     }
 }
