@@ -70,18 +70,6 @@ class DishController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Dish $dish)
-    {
-        if (Gate::allows('update-dish', $dish)) {
-            return view('admin.dishes.show', compact('dish'));
-        } else {
-            abort(403, "Non autorizzato");
-        }
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Dish $dish)
