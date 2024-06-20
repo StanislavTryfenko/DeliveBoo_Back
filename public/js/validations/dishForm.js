@@ -1,18 +1,86 @@
-function validateDishForm() {
+function validateDishForm(event) {
 
-    const name = document.forms['dishForm']['name'].value;
-    const price = document.forms['dishForm']['price'].value;
+    const name = document.forms['dishForm']['name'];
+    const price = document.forms['dishForm']['price'];
+    const image = document.forms['dishForm']['image'];
+    const description = document.forms['dishForm']['description'];
 
-    if (!name) {
-        alert("Aggiungi un Nome.");
-        return false;
+    let pushForm = true;
+
+    //name
+    let nameHelp = document.getElementById('nameHelp');
+    if (nameHelp) {
+        nameHelp.remove();
+        name.classList.remove('is-invalid');
+    }
+    name.classList.add('is-valid');
+    if (!name.value) {
+        name.insertAdjacentHTML('afterend', '<small id="nameHelp" class="text-danger">Devi inserire un nome</small>');
+        name.classList.remove('is-valid');
+        name.classList.add('is-invalid');
+        pushForm = false;
+    }
+    if(name.value.length > 100){
+        name.insertAdjacentHTML('afterend', '<small id="nameHelp" class="text-danger">Il nome non puo avere piu di 100 caratteri</small>');
+        name.classList.remove('is-valid');
+        name.classList.add('is-invalid');
+        pushForm = false;
     }
 
+    //price
+    let priceHelp = document.getElementById('priceHelp');
+    if (priceHelp) {
+        priceHelp.remove();
+        price.classList.remove('is-invalid');
+    }
+    price.classList.add('is-valid');
     if (isNaN(price) || price < 0 || price > 999.99 || price.toString().split('.')[1] && price.toString().split('.')[1].length > 2) {
-        alert("Aggiungi un Prezzo.");
-        return false;
+        price.insertAdjacentHTML('afterend', '<small id="priceHelp" class="text-danger">Devi inserire un prezzo (valore numerico tra 0 e 999.99)</small>');
+        price.classList.remove('is-valid');
+        price.classList.add('is-invalid');
+        pushForm = false;
     }
 
-    return true;
+    //image
+    image.classList.remove('is-valid');
+    if (image.value) {
+        let imageFormattHelp = document.getElementById('imageFormattHelp');
+        if (imageFormattHelp) {
+            imageFormattHelp.remove();
+            image.classList.remove('is-invalid');
+        }
+        image.classList.add('is-valid');
+        if (!image.value.endsWith('.jpg') && !image.value.endsWith('.png') && !image.value.endsWith('.jpeg') && !image.value.endsWith('.JPG') && !image.value.endsWith('.PNG') && !image.value.endsWith('.JPEG')) {
+            image.insertAdjacentHTML('afterend', `<small id="imageFormattHelp" class="text-danger">L'immagine non è valida, sono permessi solo jpg o png</small>`);
+            image.classList.remove('is-valid');
+            image.classList.add('is-invalid');
+            pushForm = false;
+        }
+    }
 
+    //description
+    description.classList.remove('is-valid');
+    if (description.value) {
+        let descriptionLenghtHelp = document.getElementById('descriptionLenghtHelp');
+        if (descriptionLenghtHelp) {
+            descriptionLenghtHelp.remove();
+            description.classList.remove('is-invalid');
+        }
+        description.classList.add('is-valid');
+        if (description.value.length < 0 || description.value.length > 255) {
+            description.insertAdjacentHTML('afterend', '<small id="descriptionLenghtHelp" class="text-danger">La descrizione deve essere minore di 255 caratteri</small>');
+            description.classList.remove('is-valid');
+            description.classList.add('is-invalid');
+            pushForm = false;
+        }
+    }
+
+    // console.log(pushForm);
+    event.preventDefault(event);
+    //form validation !important: this must be the last validation
+    if (pushForm === false) {
+        event.preventDefault(event);
+    } else {
+        return true;
+    }
 }
