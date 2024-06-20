@@ -44,7 +44,6 @@ function validateDishForm(event) {
         document.getElementById('€').classList.add('border-danger');
         pushForm = false;
     }
-console.log(document.getElementById('€'));
 
     //image
     image.classList.remove('is-valid');
@@ -82,7 +81,7 @@ console.log(document.getElementById('€'));
     }
 
     //debug mode
-    event.preventDefault(event);
+    //event.preventDefault(event);
 
     //form validation !important: this must be the last validation
     if (pushForm === false) {
