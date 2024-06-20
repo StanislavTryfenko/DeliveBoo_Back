@@ -12,8 +12,22 @@ use Illuminate\Support\Facades\DB;
 class RestaurantController extends Controller
 {
     public function index()
+
+    
+    /* 
+    la query usata: 
+        SELECT * FROM `restaurants`
+        JOIN `dishes` ON `restaurants`.`id` = `dishes`.`restaurant_id`
+        WHERE `dishes`.`visible` = 1;
+    */
+
     {
-        $restaurants = Restaurant::with('types', 'dishes')->orderByDesc('id')->paginate(9);
+        $restaurants = Restaurant::with('types', 'dishes')
+            ->whereHas('dishes', function ($query) {
+                $query->where('visible', 1);
+            })
+            ->orderByDesc('id')
+            ->paginate(9);
         $types = Type::all();
         $dishes = Dish::all();
 
@@ -27,7 +41,9 @@ class RestaurantController extends Controller
 
     public function getSingleRestaurant($id)
     {
-        $restaurant = Restaurant::with('types', 'dishes')->where('id', $id)->first();
+        $restaurant = Restaurant::with(['types', 'dishes' => function ($query) {
+            $query->where('visible', 1);
+        }])->where('id', $id)->first();
 
         if ($restaurant) {
             return response()->json([
