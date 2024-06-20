@@ -34,7 +34,7 @@ function validateDishForm(event) {
         price.classList.remove('is-invalid');
     }
     price.classList.add('is-valid');
-    if (isNaN(price) || price < 0 || price > 999.99 || price.toString().split('.')[1] && price.toString().split('.')[1].length > 2) {
+    if (isNaN(price.value) || price.value < 0 || price.value > 999.99) {
         price.insertAdjacentHTML('afterend', '<small id="priceHelp" class="text-danger d-block">Devi inserire un prezzo (valore numerico tra 0 e 999.99)</small>');
         price.classList.remove('is-valid');
         price.classList.add('is-invalid');
