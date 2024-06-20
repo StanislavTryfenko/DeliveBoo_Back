@@ -42,8 +42,8 @@
                 <div class="row mb-3">
                     <div class="col-6">
                         <label for="price" class="form-label"><strong>Prezzo:</strong></label>
-                        <div class="input-group">
-                            <span class="input-group-text">€</span>
+                        <div class="input-group has-validation">
+                            <span id="€" class="input-group-text" style="margin-right: -3px">€</span>
                             <input type="text" class="form-control" id="price" aria-label="amount" name="price"
                                 value="{{ old('price', $dish->price) }}">
                         </div>

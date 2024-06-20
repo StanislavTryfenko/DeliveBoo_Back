@@ -32,14 +32,19 @@ function validateDishForm(event) {
     if (priceHelp) {
         priceHelp.remove();
         price.classList.remove('is-invalid');
+        document.getElementById('€').classList.remove('border-danger');
     }
     price.classList.add('is-valid');
+    document.getElementById('€').classList.add('border-success');
     if (isNaN(price.value) || price.value < 0 || price.value > 999.99 || !price.value) {
         price.insertAdjacentHTML('afterend', '<small id="priceHelp" class="text-danger d-block">Devi inserire un prezzo (valore numerico tra 0 e 999.99)</small>');
         price.classList.remove('is-valid');
+        document.getElementById('€').classList.remove('border-success');
         price.classList.add('is-invalid');
+        document.getElementById('€').classList.add('border-danger');
         pushForm = false;
     }
+console.log(document.getElementById('€'));
 
     //image
     image.classList.remove('is-valid');
@@ -47,6 +52,7 @@ function validateDishForm(event) {
         let imageFormattHelp = document.getElementById('imageFormattHelp');
         if (imageFormattHelp) {
             imageFormattHelp.remove();
+            //devo prendere il tag genitore di image 
             image.classList.remove('is-invalid');
         }
         image.classList.add('is-valid');
@@ -76,7 +82,7 @@ function validateDishForm(event) {
     }
 
     //debug mode
-    //event.preventDefault(event);
+    event.preventDefault(event);
 
     //form validation !important: this must be the last validation
     if (pushForm === false) {
