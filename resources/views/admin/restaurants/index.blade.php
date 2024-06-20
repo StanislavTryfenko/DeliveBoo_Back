@@ -31,7 +31,9 @@
                                 <div class="contacts">
                                     <p><i class="fa-solid fa-location-dot"></i>{{ $restaurant->address }}</p>
                                     <p><i class="fa-solid fa-envelope"></i>{{ $restaurant->contact_email }}</p>
-                                    <p><i class="fa-solid fa-phone"></i> {{ $restaurant->phone_number }}</p>
+                                    @if ($restaurant->phone_number)
+                                        <p><i class="fa-solid fa-phone"></i> {{ $restaurant->phone_number }}</p>
+                                    @endif
                                     <p><span class="fw-bold">VAT </span>{{ $restaurant->vat }}</p>
                                     <p>
                                         <i class="fa-solid fa-bowl-food"></i>
