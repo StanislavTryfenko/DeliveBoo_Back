@@ -13,14 +13,13 @@ class RestaurantController extends Controller
 {
     public function index()
 
-    
+
     /* 
     la query usata: 
         SELECT * FROM `restaurants`
         JOIN `dishes` ON `restaurants`.`id` = `dishes`.`restaurant_id`
         WHERE `dishes`.`visible` = 1;
     */
-
     {
         $restaurants = Restaurant::with('types', 'dishes')
             ->whereHas('dishes', function ($query) {
@@ -41,9 +40,12 @@ class RestaurantController extends Controller
 
     public function getSingleRestaurant($id)
     {
-        $restaurant = Restaurant::with(['types', 'dishes' => function ($query) {
-            $query->where('visible', 1);
-        }])->where('id', $id)->first();
+        $restaurant = Restaurant::with([
+            'types',
+            'dishes' => function ($query) {
+                $query->where('visible', 1);
+            }
+        ])->where('id', $id)->first();
 
         if ($restaurant) {
             return response()->json([
@@ -81,6 +83,19 @@ class RestaurantController extends Controller
             ->havingRaw('COUNT(types.id) = ?', [$filteredList]);
 
         $restaurants = $query->paginate(9);
+
+        $restaurantIds = $restaurants->pluck('id');
+
+        $types = DB::table('restaurant_type')
+            ->select('restaurant_type.restaurant_id', 'types.id as type_id', 'types.name as type_name')
+            ->join('types', 'restaurant_type.type_id', '=', 'types.id')
+            ->whereIn('restaurant_type.restaurant_id', $restaurantIds)
+            ->get()
+            ->groupBy('restaurant_id');
+
+        foreach ($restaurants as $restaurant) {
+            $restaurant->types = $types->get($restaurant->id) ?? collect();
+        }
 
         return response()->json([
             'success' => true,
