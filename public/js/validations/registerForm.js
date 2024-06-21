@@ -147,7 +147,7 @@ function validateRegisterForm(event) {
             thumb.classList.remove('is-invalid');
         }
         thumb.classList.add('is-valid');
-        if (!thumb.value.endsWith('.jpg') && !thumb.value.endsWith('.png') && !thumb.value.endsWith('.jpeg') && !thumb.value.endsWith('.JPG') && !thumb.value.endsWith('.PNG') && !thumb.value.endsWith('.JPEG')) {
+        if (!thumb.value.endsWith('.jpg') && !thumb.value.endsWith('.png') && !image.value.endsWith('.jfif') && !thumb.value.endsWith('.jpeg') && !thumb.value.endsWith('.JPG') && !thumb.value.endsWith('.PNG') && !thumb.value.endsWith('.JPEG')) {
             thumb.insertAdjacentHTML('afterend', '<small id="thumbFormattHelp" class="text-danger">Il thumb non è valido, sono permessi solo jpg o png</small>');
             thumb.classList.remove('is-valid');
             thumb.classList.add('is-invalid');
@@ -164,7 +164,7 @@ function validateRegisterForm(event) {
             logo.classList.remove('is-invalid');
         }
         logo.classList.add('is-valid');
-        if (!logo.value.endsWith('.jpg') && !logo.value.endsWith('.png') && !logo.value.endsWith('.jpeg') && !logo.value.endsWith('.JPG') && !logo.value.endsWith('.PNG') && !logo.value.endsWith('.JPEG')) {
+        if (!logo.value.endsWith('.jpg') && !logo.value.endsWith('.png') && !image.value.endsWith('.jfif') && !logo.value.endsWith('.jpeg') && !logo.value.endsWith('.JPG') && !logo.value.endsWith('.PNG') && !logo.value.endsWith('.JPEG')) {
             logo.insertAdjacentHTML('afterend', '<small id="logoFormattHelp" class="text-danger">Il logo non è valido, sono permessi solo jpg o png</small>');
             logo.classList.remove('is-valid');
             logo.classList.add('is-invalid');
