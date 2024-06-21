@@ -55,7 +55,7 @@ function validateDishForm(event) {
             image.classList.remove('is-invalid');
         }
         image.classList.add('is-valid');
-        if (!image.value.endsWith('.jpg') && !image.value.endsWith('.png') && !image.value.endsWith('.jpeg') && !image.value.endsWith('.JPG') && !image.value.endsWith('.PNG') && !image.value.endsWith('.JPEG')) {
+        if (!image.value.endsWith('.jpg') && !image.value.endsWith('.png') && !image.value.endsWith('.jpeg') && !image.value.endsWith('.jfif') && !image.value.endsWith('.JPG') && !image.value.endsWith('.PNG') && !image.value.endsWith('.JPEG')) {
             image.insertAdjacentHTML('afterend', `<small id="imageFormattHelp" class="text-danger d-block">L'immagine non è valida, sono permessi solo jpg o png</small>`);
             image.classList.remove('is-valid');
             image.classList.add('is-invalid');
