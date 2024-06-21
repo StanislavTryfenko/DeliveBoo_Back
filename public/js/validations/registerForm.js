@@ -102,7 +102,7 @@ function validateRegisterForm(event) {
     }
 
     if (password.value !== passwordCheck.value) {
-        alert("Le password non corrispondono!");
+        // alert("Le password non corrispondono!");
 
         document.getElementById('type-error').insertAdjacentHTML('afterend', ' <small id="typesHelp" class="text-danger">Devi selezionare almeno un tipo</small>');
         pushForm = false;

@@ -7,6 +7,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Registrazione') }}</div>
 
+
                     <div class="card-body">
                         <form method="post" action="{{ route('register') }}" enctype="multipart/form-data" name="registerForm"
                             onsubmit="return validateRegisterForm(event)">
@@ -82,6 +83,17 @@
                                 </div>
                             </div>
 
+                            <!-- 
+                                <div class="card">
+                                    <div class="card-header">{{ __('Dati del Ristorante') }}</div>
+                                </div>
+                            -->
+                            
+                            <!-- need to fix this cause its ugly -->
+                            <hr>
+                            <strong class="">{{ __('Dati del Ristorante') }}</strong>
+                            <hr>
+                        
                             <!--nome ristorante-->
                             <div class="mb-4 row">
                                 <label for="name_restaurant"
@@ -237,6 +249,7 @@
                         </form>
                     </div>
                 </div>
+                <br>
             </div>
         </div>
     </div>
