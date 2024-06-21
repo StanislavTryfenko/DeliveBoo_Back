@@ -28,7 +28,7 @@ class DishController extends Controller
             return view('admin.restaurants.index', compact('restaurant', 'typeList'));
         } else {
             $restaurant_id = $user->restaurant->id;
-            $dishes = Dish::where('restaurant_id', $restaurant_id)->get();
+            $dishes = Dish::where('restaurant_id', $restaurant_id)->orderBy('name', 'asc')->get();
 
             return view('admin.dishes.index', compact('dishes'));
         }
