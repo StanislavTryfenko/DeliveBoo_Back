@@ -36,8 +36,8 @@ class OrderSeeder extends Seeder
                 $order = new Order();
                 $order->restaurant_id = $restaurant->id;
                 $order->customer_name = $orderData['name'];
-                $order->customer_lastname=$orderData['lastname'];
-                $order->customer_phone_number=$faker->phoneNumber;
+                $order->customer_lastname = $orderData['lastname'];
+                $order->customer_phone_number = $faker->phoneNumber;
                 $order->customer_address = $faker->streetAddress;
                 $order->customer_email = $faker->safeEmail;
                 $order->total_price = $faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 9999.99);
@@ -46,6 +46,6 @@ class OrderSeeder extends Seeder
                 $order->save();
             }
         }
+
     }
-    
 }
