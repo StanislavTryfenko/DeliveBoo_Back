@@ -41,13 +41,17 @@ class OrderController extends Controller
         if ($result->success) {
             $data = [
                 'success' => true,
-                'message' => "Transazione eseguita con Successo!"
+                'message' => "Transazione eseguita con Successo!",
+                'order' => $order,
+                'paymentMethodNonce' => $request->token,
             ];
             return response()->json($data, 200);
         } else {
             $data = [
                 'success' => false,
-                'message' => "Transazione Fallita!!"
+                'message' => "Transazione Fallita!!",
+                'order' => $order,
+                'paymentMethodNonce' => $request->token,
             ];
             return response()->json($data, 401);
         }
