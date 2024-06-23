@@ -42,7 +42,7 @@ class OrderController extends Controller
         //4) modificare l'amount, perchè non deve ricevere più order, ma adesso deve ricevere il prezzo totale dell'ordine(controllare la valuta)
         //5)creare un form lato user che indichi il nome, il cognome, l'indirizzo,l'email,numero telefono,prezzo totale(che dobbiamo calcolare e salvare non in fase di salvataggio),data(recuperandola dal sistema)
 
-        $totalPrice = 0;
+        $totalPrice = null;
 
         foreach ($order as $singleDish) {
             $dish = Dish::find($singleDish['id']);
@@ -76,7 +76,15 @@ class OrderController extends Controller
         $newOrder->save();
 
         //solo dopo aver creato l'ordine, posso fare l'attach con i singoli piatti
-
+        foreach ($order as $dishOrder) {
+            $dishControl = Dish::find($dishOrder['id']);
+            $newOrder->dishes()->attach($dishOrder['id'], [
+                'dish_name' => $dishControl->name,
+                'dish_quantity' => $dishOrder['quantity'],
+                'dish_price' =>  $dishControl->price,
+            ]);
+        }
+        
         $result = $gateway->transaction()->sale([
             'amount' => $totalPrice, // qui devo inserire il totale dell'ordine
             'paymentMethodNonce' => $request->token,
@@ -98,6 +106,7 @@ class OrderController extends Controller
                 'paymentMethodNonce' => $request->token,
                 'all' => $request->all(),
                 'totalPrice' => $totalPrice,
+                'result'=>$result
             ];
             return response()->json($data, 200);
         } else {
@@ -108,6 +117,7 @@ class OrderController extends Controller
                 'paymentMethodNonce' => $request->token,
                 'all' => $request->all(),
                 'totalPrice' => $totalPrice,
+                'result'=>$result
             ];
             return response()->json($data, 401);
         }
