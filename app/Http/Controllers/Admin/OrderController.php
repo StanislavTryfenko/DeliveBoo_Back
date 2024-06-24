@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Order;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Models\Type;
+use Illuminate\Support\Facades\Auth;
+
 
 class OrderController extends Controller
 {
@@ -13,24 +17,22 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+
+        $user = Auth::user();
+        if (!$user->restaurant) {
+            $restaurant = $user->restaurant;
+            $typeList = Type::all();
+
+            return view('admin.restaurants.index', compact('restaurant', 'typeList'));
+        } else {
+            $restaurant_id = $user->restaurant->id;
+            $orders = Order::where('restaurant_id', $restaurant_id)->orderByDesc('id')->get();
+
+
+            return view('admin.orders.index', compact('orders'));
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreOrderRequest $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
