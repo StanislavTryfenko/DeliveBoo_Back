@@ -77,7 +77,7 @@ class DishController extends Controller
         if (Gate::allows('update-dish', $dish)) {
             return view('admin.dishes.edit', compact('dish'));
         } else {
-            abort(403, "Non autorizzato");
+            abort(404, "Piatto non trovato");
         }
     }
 
@@ -102,7 +102,7 @@ class DishController extends Controller
 
             return to_route('admin.dishes.index')->with('message', "$dish->name è stato modificato con successo!");
         } else {
-            abort(403, "Non cercare di modificare i piatti di altri ristoranti");
+            abort(404, "Piatto non trovato");
         }
     }
     /**
@@ -117,7 +117,7 @@ class DishController extends Controller
             $dish->delete();
             return to_route('admin.dishes.index')->with('message', "$dish->name è stato rimosso dal menu.");
         } else {
-            abort(403, "Non autorizzato a cancellare questo piatto");
+            abort(404, "Piatto non trovato");
         }
     }
 }
