@@ -12,6 +12,7 @@ use App\Models\Order;
 
 class OrderController extends Controller
 {
+
     public function generate(Request $request, Gateway $gateway)
     {
         $token = $gateway->clientToken()->generate();
@@ -27,6 +28,7 @@ class OrderController extends Controller
 
     public function makePayment(OrderRequest $request, Gateway $gateway)
     {
+
         //mi recupero tutti i piatti ordinati
         $order = $request->order;
         //mi recupero l'id del ristorante
@@ -84,7 +86,7 @@ class OrderController extends Controller
                 'dish_price' =>  $dishControl->price,
             ]);
         }
-        
+
         $result = $gateway->transaction()->sale([
             'amount' => $totalPrice, // qui devo inserire il totale dell'ordine
             'paymentMethodNonce' => $request->token,
@@ -106,7 +108,7 @@ class OrderController extends Controller
                 'paymentMethodNonce' => $request->token,
                 'all' => $request->all(),
                 'totalPrice' => $totalPrice,
-                'result'=>$result
+                'result' => $result
             ];
             return response()->json($data, 200);
         } else {
@@ -117,7 +119,7 @@ class OrderController extends Controller
                 'paymentMethodNonce' => $request->token,
                 'all' => $request->all(),
                 'totalPrice' => $totalPrice,
-                'result'=>$result
+                'result' => $result
             ];
             return response()->json($data, 401);
         }
