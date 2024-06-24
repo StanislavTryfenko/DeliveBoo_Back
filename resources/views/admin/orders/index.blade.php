@@ -27,6 +27,7 @@
                                 <th scope="col">Prezzo totale</th>
                                 <th scope="col">Data</th>
                                 <th scope="col">Stato dell'ordine</th>
+                                <th scope="col">Dettagli ordine</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,6 +38,11 @@
                                     <td scope="row">{{ $order->total_price }}</td>
                                     <td scope="row">{{ $order->date }}</td>
                                     <td scope="row">{{ $order->status }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.orders.show', $order) }}">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         @else
