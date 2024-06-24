@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 class Dish extends Model
 {
     use SoftDeletes;
@@ -18,5 +19,9 @@ class Dish extends Model
         return $this->belongsTo(Restaurant::class);
     }
 
+    public function orders():BelongsToMany
+    {
+        return $this->belongsToMany(Order::class)->withPivot('dish_name', 'dish_quantity', 'dish_price');
+    }
     use HasFactory;
 }
