@@ -22,9 +22,9 @@ class RestaurantController extends Controller
     */
     {
         $restaurants = Restaurant::with('types', 'dishes')
-            ->whereHas('dishes', function ($query) {
-                $query->where('visible', 1);
-            })
+            // ->whereHas('dishes', function ($query) {
+            //     $query->where('visible', 1);
+            // })
             ->orderByDesc('id')
             ->paginate(9);
         $types = Type::all();
