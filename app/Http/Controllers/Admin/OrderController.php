@@ -39,7 +39,12 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        // dd($order);
+        $order->load([
+            'dishes' => function ($query) {
+                $query->withTrashed();
+            }
+        ]);
+
         return view('admin.orders.show', compact('order'));
     }
 
