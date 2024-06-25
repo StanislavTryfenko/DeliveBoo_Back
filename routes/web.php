@@ -38,6 +38,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('/restaurants', RestaurantController::class)->parameters(['restaurants' => 'restaurant:slug']);
         Route::resource('/dishes', DishController::class);
         Route::resource('/orders', OrderController::class);
+        Route::get('/stats', [OrderController::class, 'stats']);
     });
 
 require __DIR__ . '/auth.php';
