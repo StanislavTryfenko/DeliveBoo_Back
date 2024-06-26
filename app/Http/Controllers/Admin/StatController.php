@@ -24,7 +24,7 @@ class StatController extends Controller
             return redirect()->route('admin.dashboard')->with('error', 'Ristorante non trovato.');
         }
 
-        $selectedYear = $request->input('year', 2023);
+        $selectedYear = $request->input('year', 2024);
 
         $orders = DB::table('orders')
             ->select(
@@ -36,7 +36,9 @@ class StatController extends Controller
             ->whereYear('date', $selectedYear)
             ->groupBy(DB::raw('MONTH(date)'))
             ->get();
+            
 
+        //mi creo un array di mesi per sostituirli in mase agli indici successivamente
         $months = [
             1 => 'Gennaio',
             2 => 'Febbraio',
@@ -56,11 +58,23 @@ class StatController extends Controller
         $orderCounts = [];
         $totalSums = [];
 
-        foreach ($orders as $order) {
-            $labels[] = $months[$order->month];
-            $orderCounts[] = $order->order_count;
-            $totalSums[] = $order->total_sum;
+        //mi inizializzo inizialmente tutti i mesi dell'anno a 0, così li posso vedere
+        foreach ($months as $singleMonth => $monthName) {
+            $labels[$singleMonth] = $monthName;
+            $orderCounts[$singleMonth] = 0;
+            $totalSums[$singleMonth] = 0.0;
         }
+        //dd($orders)
+        //ciclo adesso sugli ordini effettivi recuperati dalla query, in questo modo, potendo accedere volta per volta al singolo mese, posso inizializzare correttamente gli array orderCounts e totalSums
+        foreach ($orders as $order) {
+            $orderCounts[$order->month] = $order->order_count;
+            $totalSums[$order->month] = $order->total_sum;
+        }
+        
+        //qui devo reindicizzare l'array, partendo da 0, perchè se l'array non parte da 0 non posso vedere correttamente i dati in pagina
+        $labels = array_values($labels);
+        $orderCounts = array_values($orderCounts);
+        $totalSums = array_values($totalSums);
 
         $chartjs = app()->chartjs
             ->name('ordersChart')
