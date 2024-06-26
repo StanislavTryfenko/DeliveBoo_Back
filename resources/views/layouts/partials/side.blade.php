@@ -27,7 +27,6 @@
                             <i class="fa-solid fa-chart-simple"></i> Statistiche
                         </a>
                     </li>
-                    <li>Altre Voci</li>
                 </ul>
             </div>
 
