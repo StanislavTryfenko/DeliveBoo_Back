@@ -35,5 +35,35 @@ class RestaurantSeeder extends Seeder
         foreach (Restaurant::all() as $restaurant) {
             $restaurant->types()->attach($faker->randomElements($types_array, null));
         }
+
+        $restaurants = [
+            ['name' => 'Da Vinci\'s Table', 'address' => '5678 Piazza del Popolo, Firenze, Italia', 'mail' => '', 'phone_number' => '', 'vat' => '', 'thumb' => 'uploads\da-vinci.jpg'],
+
+            ['name' => 'L\'Italiano Gourmet', 'address' => '321 Via Giuseppe Verdi, Milano, Italia', 'mail' => '', 'phone_number' => '', 'vat' => '', 'thumb' => 'uploads\ristorante-gourmet.jpg'],
+
+            ['name' => 'Osteria del Sole', 'address' => '456 Corso Vittorio Emanuele II, Napoli, Italia', 'mail' => '', 'phone_number' => '', 'vat' => '', 'thumb' => 'uploads\osteria-del-sole.jpg'],
+
+            ['name' => 'Flavors of Italy', 'address' => '987 Via Santa Croce, Venezia, Italia', 'mail' => '', 'phone_number' => '', 'vat' => '', 'thumb' => 'uploads\flavors-of-italy.jpg'],
+
+            ['name' => 'Il Giardino d\'Italia', 'address' => '1234 Via della Stella, Roma, Italia', 'mail' => '', 'phone_number' => '', 'vat' => '', 'thumb' => 'uploads\ristorante-giardino.jpg'],
+        ];
+
+
+        // $restaurants = Restaurant::all();
+
+        // foreach ($types as $type) {
+        //     foreach ($restaurants as $restaurant) {
+        //         $restaurant = new Restaurant();
+        //         $restaurant->type_id = $type->id;
+        //         $restaurant->name = $restaurantData['name'];
+        //         $restaurant->slug = Str::of($restaurant->name_restaurant)->slug('-');
+        //         $restaurant->address = $restaurantData['address'];
+        //         $restaurant->contact_email = $faker->safeEmail();
+        //         $restaurant->phone_number = $faker->numerify('##########');
+        //         $restaurant->vat = $faker->numerify('###########');
+        //         $restaurant->logo = $restaurantData['logo'];
+        //         $restaurant->save();
+        //     }
+        // }
     }
 }
