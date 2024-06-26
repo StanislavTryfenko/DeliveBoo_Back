@@ -8,6 +8,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 
 class OrderController extends Controller
@@ -39,13 +40,17 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        $order->load([
-            'dishes' => function ($query) {
-                $query->withTrashed();
-            }
-        ]);
+        if (Gate::allows('update-order', $order)) {
+            $order->load([
+                'dishes' => function ($query) {
+                    $query->withTrashed();
+                }
+            ]);
 
-        return view('admin.orders.show', compact('order'));
+            return view('admin.orders.show', compact('order'));
+        } else {
+            abort(404);
+        }
     }
 
     /**

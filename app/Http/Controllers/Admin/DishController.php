@@ -77,7 +77,7 @@ class DishController extends Controller
         if (Gate::allows('update-dish', $dish)) {
             return view('admin.dishes.edit', compact('dish'));
         } else {
-            abort(404, "Piatto non trovato");
+            abort(404);
         }
     }
 
@@ -102,7 +102,7 @@ class DishController extends Controller
 
             return to_route('admin.dishes.index')->with('message', "$dish->name è stato modificato con successo!");
         } else {
-            abort(404, "Piatto non trovato");
+            abort(404);
         }
     }
     /**
@@ -117,7 +117,7 @@ class DishController extends Controller
             $dish->delete();
             return to_route('admin.dishes.index')->with('message', "$dish->name è stato rimosso dal menu.");
         } else {
-            abort(404, "Piatto non trovato");
+            abort(404);
         }
     }
 }
