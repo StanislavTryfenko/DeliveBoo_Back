@@ -1,84 +1,103 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Restaurant;
 
 class StatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $chartjs = app()->chartjs
-        ->name('lineChartTest')
-        ->type('line')
-        ->size(['width' => 400, 'height' => 200])
-        ->labels(['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'])
-        ->datasets([
-            [
-                "label" => "My First dataset",
-                'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                'borderColor' => "rgba(38, 185, 154, 0.7)",
-                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                "pointHoverBackgroundColor" => "#fff",
-                "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                "data" => [65, 59, 80, 81, 56, 55, 40],
-                "fill" => false,
-            ],
-        ])
-        ->options([]);
-        return view('admin.stats.index',compact('chartjs'));
-      
-    }
+	/**
+	 * Display a listing of the resource.
+	 */
+	public function index(Request $request)
+	{
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+		$currentUser = Auth::id();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+		$currentRestaurant = Restaurant::where('user_id', $currentUser)->first();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        dd($id);
-    }
+		if (!$currentRestaurant) {
+			return redirect()->route('admin.dashboard')->with('error', 'Ristorante non trovato.');
+		}
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        
-    }
+		$selectedYear = $request->input('year', 2023);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+		$orders = DB::table('orders')
+			->select(
+				DB::raw('MONTH(date) as month'),
+				DB::raw('COUNT(id) as order_count'),
+				DB::raw('SUM(total_price) as total_sum')
+			)
+			->where('restaurant_id', $currentRestaurant->id)
+			->whereYear('date', $selectedYear)
+			->groupBy(DB::raw('MONTH(date)'))
+			->get();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+		$labels = [];
+		$orderCounts = [];
+		$totalSums = [];
+
+		foreach ($orders as $order) {
+			$labels[] = $order->month;
+			$orderCounts[] = $order->order_count;
+			$totalSums[] = $order->total_sum;
+		}
+
+		$chartjs = app()->chartjs
+			->name('ordersChart')
+			->type('bar')
+			->labels($labels)
+			->datasets([
+				[
+					"label" => "Numero di Ordini",
+					'backgroundColor' => 'rgba(75, 192, 192, 0.6)',
+					'borderColor' => 'rgba(75, 192, 192, 1)',
+					"data" => $orderCounts,
+					"order" => 1,
+					"yAxisID" => "ordersAxis",
+				],
+				[
+					"label" => "Somma Totale degli Ordini",
+					'backgroundColor' => 'rgba(255, 99, 132, 0.6)',
+					'borderColor' => 'rgba(255, 99, 132, 1)',
+					"data" => $totalSums,
+					"order" => 2,
+					"yAxisID" => "totalAxis",
+				]
+			])
+			->options([
+				'scales' => [
+					'yAxes' => [
+						[
+							'id' => 'ordersAxis',
+							'type' => 'linear',
+							'position' => 'left',
+							'ticks' => [
+								'beginAtZero' => true,
+								'stepSize' => 1,
+								'max' => 20
+							],
+						],
+						[
+							'id' => 'totalAxis',
+							'type' => 'linear',
+							'position' => 'right',
+							'ticks' => [
+								'beginAtZero' => true,
+								'stepSize' => 400,
+								'max' => 2000
+							],
+						],
+					],
+				],
+			]);
+
+		return view('admin.stats.index', compact('chartjs', 'selectedYear'));
+	}
+
+
 }
