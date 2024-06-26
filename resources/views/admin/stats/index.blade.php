@@ -7,14 +7,22 @@
         <h2>Statistiche</h2>
 
         <form action="{{ route('admin.stats.index') }}" method="GET">
-          <label for="year">Seleziona l'anno:</label>
-          <select name="year" id="year">
-            @for ($i = date('Y'); $i >= 2022; $i--)
-              <option value="{{ $i }}" {{ $i == $selectedYear ? 'selected' : '' }}>{{ $i }}
-              </option>
-            @endfor
+          <label for="period">Seleziona il periodo da esaminare</label>
+          <select name="period" id="period">
+            <option value="last12" {{ $selectedPeriod == 'last12' ? 'selected' : '' }}>
+              Ultimi 12 mesi
+            </option>
+            <option value="last13-24" {{ $selectedPeriod == 'last13-24' ? 'selected' : '' }}>
+              Ultimi 13-24 mesi
+            </option>
+            <option value="last25-36" {{ $selectedPeriod == 'last25-36' ? 'selected' : '' }}>
+              Ultimi 25-36 mesi
+            </option>
           </select>
-          <button type="submit" class="btn btn-primary rounded border">vai</button>
+          <div class="p-2">
+            <button type="submit" class="btn btn-primary rounded border">filtra risultati</button>
+            <a href="{{ route('admin.stats.index') }}" class="btn btn-secondary rounded border">Resetta filtri</a>
+          </div>
         </form>
       </div>
     </div>
