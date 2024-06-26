@@ -16,15 +16,28 @@ class RestaurantSeeder extends Seeder
      */
     public function run(Faker $faker): void
     {
-        $types = Type::all();
+        $restaurants = [
+            ['name' => 'Da Vinci\'s Table', 'address' => '5678 Piazza del Popolo, Firenze, Italia', 'thumb' => 'uploads/da-vinci.jpg'],
 
-        for ($i = 0; $i < 5; $i++) {
+            ['name' => 'L\'Italiano Gourmet', 'address' => '321 Via Giuseppe Verdi, Milano, Italia', 'thumb' => 'uploads/ristorante-gourmet.jpg'],
+
+            ['name' => 'Osteria del Sole', 'address' => '456 Corso Vittorio Emanuele II, Napoli, Italia', 'thumb' => 'uploads/osteria-del-sole.jpg'],
+
+            ['name' => 'Flavors of Italy', 'address' => '987 Via Santa Croce, Venezia, Italia', 'thumb' => 'uploads/flavors-of-italy.jpg'],
+
+            ['name' => 'Il Giardino d\'Italia', 'address' => '1234 Via della Stella, Roma, Italia', 'thumb' => 'uploads/ristorante-giardino.jpg'],
+        ];
+
+        // $types = Type::all();
+
+        for ($i = 0; $i < count($restaurants); $i++) {
             $restaurant = new Restaurant();
-            $restaurant->name_restaurant = $faker->words(4, true);
+            $restaurant->name_restaurant = $restaurants[$i]['name'];
             $restaurant->slug = Str::of($restaurant->name_restaurant)->slug('-');
             $restaurant->contact_email = $faker->safeEmail();
             $restaurant->vat = $faker->numerify('###########');
-            $restaurant->address = $faker->address;
+            $restaurant->address = $restaurants[$i]['address'];
+            $restaurant->thumb = $restaurants[$i]['thumb'];
             $restaurant->phone_number = $faker->numerify('##########');
             $restaurant->user_id = $i + 1;
             $restaurant->save();
@@ -36,17 +49,7 @@ class RestaurantSeeder extends Seeder
             $restaurant->types()->attach($faker->randomElements($types_array, null));
         }
 
-        $restaurants = [
-            ['name' => 'Da Vinci\'s Table', 'address' => '5678 Piazza del Popolo, Firenze, Italia', 'mail' => '', 'phone_number' => '', 'vat' => '', 'thumb' => 'uploads\da-vinci.jpg'],
 
-            ['name' => 'L\'Italiano Gourmet', 'address' => '321 Via Giuseppe Verdi, Milano, Italia', 'mail' => '', 'phone_number' => '', 'vat' => '', 'thumb' => 'uploads\ristorante-gourmet.jpg'],
-
-            ['name' => 'Osteria del Sole', 'address' => '456 Corso Vittorio Emanuele II, Napoli, Italia', 'mail' => '', 'phone_number' => '', 'vat' => '', 'thumb' => 'uploads\osteria-del-sole.jpg'],
-
-            ['name' => 'Flavors of Italy', 'address' => '987 Via Santa Croce, Venezia, Italia', 'mail' => '', 'phone_number' => '', 'vat' => '', 'thumb' => 'uploads\flavors-of-italy.jpg'],
-
-            ['name' => 'Il Giardino d\'Italia', 'address' => '1234 Via della Stella, Roma, Italia', 'mail' => '', 'phone_number' => '', 'vat' => '', 'thumb' => 'uploads\ristorante-giardino.jpg'],
-        ];
 
 
         // $restaurants = Restaurant::all();
