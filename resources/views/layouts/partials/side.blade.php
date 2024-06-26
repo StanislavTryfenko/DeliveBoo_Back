@@ -19,7 +19,12 @@
                     </li>
                     <li>
                         <a class="nav-link" href="{{ route('admin.orders.index') }}">
-                            <i class="fa-solid fa-utensils"></i> Ordini
+                            <i class="fa-solid fa-bell"></i> Ordini
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ route('admin.stats.index') }}">
+                            <i class="fa-solid fa-chart-simple"></i> Statistiche
                         </a>
                     </li>
                     <li>Altre Voci</li>

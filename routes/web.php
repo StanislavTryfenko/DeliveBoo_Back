@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\StatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,9 @@ Route::middleware(['auth', 'verified'])
         Route::resource('/restaurants', RestaurantController::class)->parameters(['restaurants' => 'restaurant:slug']);
         Route::resource('/dishes', DishController::class);
         Route::resource('/orders', OrderController::class);
+        Route::resource('/stats', StatController::class);
+        
+
     });
 
 require __DIR__ . '/auth.php';

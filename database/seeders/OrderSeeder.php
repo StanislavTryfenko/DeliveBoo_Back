@@ -27,6 +27,46 @@ class OrderSeeder extends Seeder
             ['name' => 'Paolo', 'lastname' => 'Gialli'],
             ['name' => 'Giorgio', 'lastname' => 'Russo'],
             ['name' => 'Laura', 'lastname' => 'Bianco'],
+            ['name' => 'Andrea', 'lastname' => 'Ferrari'],
+            ['name' => 'Elena', 'lastname' => 'Moretti'],
+            ['name' => 'Giovanni', 'lastname' => 'Greco'],
+            ['name' => 'Maria', 'lastname' => 'Esposito'],
+            ['name' => 'Simone', 'lastname' => 'Romano'],
+            ['name' => 'Cristina', 'lastname' => 'Martini'],
+            ['name' => 'Davide', 'lastname' => 'Barbieri'],
+            ['name' => 'Valentina', 'lastname' => 'Gatti'],
+            ['name' => 'Alessandro', 'lastname' => 'Costa'],
+            ['name' => 'Serena', 'lastname' => 'Fontana'],
+            ['name' => 'Matteo', 'lastname' => 'Ricci'],
+            ['name' => 'Silvia', 'lastname' => 'Marini'],
+            ['name' => 'Lorenzo', 'lastname' => 'Conte'],
+            ['name' => 'Chiara', 'lastname' => 'Rinaldi'],
+            ['name' => 'Federico', 'lastname' => 'Mancini'],
+            ['name' => 'Roberta', 'lastname' => 'Vitale'],
+            ['name' => 'Enrico', 'lastname' => 'Ruggiero'],
+            ['name' => 'Francesca', 'lastname' => 'Basile'],
+            ['name' => 'Stefano', 'lastname' => 'Colombo'],
+            ['name' => 'Giulia', 'lastname' => 'Rinaldi'],
+            ['name' => 'Fabio', 'lastname' => 'Bianchi'],
+            ['name' => 'Lucia', 'lastname' => 'De Luca'],
+            ['name' => 'Pietro', 'lastname' => 'Giordano'],
+            ['name' => 'Carla', 'lastname' => 'Ferraro'],
+            ['name' => 'Giorgia', 'lastname' => 'Lombardi'],
+            ['name' => 'Nicola', 'lastname' => 'Ferri'],
+            ['name' => 'Alessia', 'lastname' => 'Leone'],
+            ['name' => 'Roberto', 'lastname' => 'Grimaldi'],
+            ['name' => 'Martina', 'lastname' => 'Santoro'],
+            ['name' => 'Daniele', 'lastname' => 'Orlando'],
+            ['name' => 'Giada', 'lastname' => 'Marino'],
+            ['name' => 'Riccardo', 'lastname' => 'Guerra'],
+            ['name' => 'Veronica', 'lastname' => 'Pellegrini'],
+            ['name' => 'Giuseppe', 'lastname' => 'Rizzo'],
+            ['name' => 'Elisabetta', 'lastname' => 'D’Amico'],
+            ['name' => 'Tommaso', 'lastname' => 'Serra'],
+            ['name' => 'Sofia', 'lastname' => 'Ferrara'],
+            ['name' => 'Claudio', 'lastname' => 'Longo'],
+            ['name' => 'Gabriele', 'lastname' => 'Monti'],
+            ['name' => 'Ilaria', 'lastname' => 'Gentile']
         ];
         //recupero tutte le istanze dei ristoranti
         $restaurants = Restaurant::all();
@@ -40,12 +80,11 @@ class OrderSeeder extends Seeder
                 $order->customer_phone_number = $faker->phoneNumber;
                 $order->customer_address = $faker->streetAddress;
                 $order->customer_email = $faker->safeEmail;
-                $order->total_price = $faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 9999.99);
-                $order->date = $faker->dateTimeThisCentury()->format('Y-m-d H:i:s');
+                $order->total_price = $faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 999.99);
+                $order->date = $faker->dateTimeBetween('2022-01-01', 'now')->format('Y-m-d H:i:s'); //grazie a faker indico che la data deve essere casuale ed inserita dal primo gennaio 2022 ad oggi con formato date time
                 //manca status perchè viene messo di default
                 $order->save();
             }
         }
-
     }
 }

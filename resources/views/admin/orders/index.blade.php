@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+
 <div class="container-fluid p-4">
     <div class="row">
         <div class="col-12">
@@ -56,3 +57,4 @@
     </div>
 </div>
 @endsection
+
