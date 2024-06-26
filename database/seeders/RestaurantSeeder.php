@@ -28,8 +28,6 @@ class RestaurantSeeder extends Seeder
             ['name' => 'Il Giardino d\'Italia', 'address' => '1234 Via della Stella, Roma, Italia', 'thumb' => 'uploads/ristorante-giardino.jpg'],
         ];
 
-        // $types = Type::all();
-
         for ($i = 0; $i < count($restaurants); $i++) {
             $restaurant = new Restaurant();
             $restaurant->name_restaurant = $restaurants[$i]['name'];
@@ -48,25 +46,5 @@ class RestaurantSeeder extends Seeder
         foreach (Restaurant::all() as $restaurant) {
             $restaurant->types()->attach($faker->randomElements($types_array, null));
         }
-
-
-
-
-        // $restaurants = Restaurant::all();
-
-        // foreach ($types as $type) {
-        //     foreach ($restaurants as $restaurant) {
-        //         $restaurant = new Restaurant();
-        //         $restaurant->type_id = $type->id;
-        //         $restaurant->name = $restaurantData['name'];
-        //         $restaurant->slug = Str::of($restaurant->name_restaurant)->slug('-');
-        //         $restaurant->address = $restaurantData['address'];
-        //         $restaurant->contact_email = $faker->safeEmail();
-        //         $restaurant->phone_number = $faker->numerify('##########');
-        //         $restaurant->vat = $faker->numerify('###########');
-        //         $restaurant->logo = $restaurantData['logo'];
-        //         $restaurant->save();
-        //     }
-        // }
     }
 }
