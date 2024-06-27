@@ -80,8 +80,8 @@ class OrderSeeder extends Seeder
                 $order->customer_phone_number = $faker->phoneNumber;
                 $order->customer_address = $faker->streetAddress;
                 $order->customer_email = $faker->safeEmail;
-                $order->total_price = $faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 999.99);
-                $order->date = $faker->dateTimeBetween('2022-01-01', 'now')->format('Y-m-d H:i:s'); //grazie a faker indico che la data deve essere casuale ed inserita dal primo gennaio 2022 ad oggi con formato date time
+                $order->total_price = $faker->randomFloat($nbMaxDecimals = 3, $min = 9.99, $max = 399.99);
+                $order->date = $faker->dateTimeBetween('2021-06-01', 'now')->format('Y-m-d H:i:s'); //grazie a faker indico che la data deve essere casuale ed inserita dal primo gennaio 2022 ad oggi con formato date time
                 //manca status perchè viene messo di default
                 $order->save();
             }

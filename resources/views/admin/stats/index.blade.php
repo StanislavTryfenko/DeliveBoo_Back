@@ -27,18 +27,28 @@
       </div>
     </div>
 
-    <div class="row py-2">
-      <div class="col-8">
-        <h5>Numero di vendite</h5>
-        <div class="card p-3">
+    <div class="row py-3">
+      <div class="col-8 mb-4">
+        <div class="card p-3 chart_card">
           {!! $chartjs->render() !!}
         </div>
       </div>
-      <div class="col-12">
-
+      <div class="col-4 mb-4 p-1 h-100 align-self-end">
+        <p class="fw-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, provident corporis repudiandae
+          perspiciatis
+          molestiae necessitatibus soluta natus consectetur labore quisquam.</p>
+      </div>
+      <div class="col-8">
+        <div class="card p-3 chart_card">
+          {!! $chartjs2->render() !!}
+        </div>
+      </div>
+      <div class="col-4 p-1 h-100 align-self-end">
+        <p class="fw-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, provident corporis repudiandae
+          perspiciatis
+          molestiae necessitatibus soluta natus consectetur labore quisquam.</p>
       </div>
     </div>
-
 
   </div>
 @endsection

@@ -15,15 +15,15 @@ class StatController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		/* accedi ai dati del ristorante corrente; reindirizza alla registrazione se non esiste */
+		/* Accesso ai dati del ristorante corrente; reindirizza alla registrazione se non esiste */
 		$currentUser = Auth::id();
 		$currentRestaurant = Restaurant::where('user_id', $currentUser)->first();
 		if (!$currentRestaurant) {
 			return redirect()->route('admin.dashboard')->with('error', 'Ristorante non trovato.');
 		}
 
-		$selectedPeriod = $request->input('period', 'last12'); //default ultimi 12 mesi
-
+		/* filtro per periodi */
+		$selectedPeriod = $request->input('period', 'last12');
 		$endDate = now();
 		$startDate = match ($selectedPeriod) {
 			'last12' => now()->subMonths(12),
@@ -32,6 +32,7 @@ class StatController extends Controller
 			default => now()->subMonths(12),
 		};
 
+		/* query chart 1 con total orders e somma del venduto */
 		$orders = DB::table('orders')
 			->select(
 				DB::raw('MONTH(date) as month'),
@@ -44,7 +45,25 @@ class StatController extends Controller
 			->groupBy(DB::raw('YEAR(date), MONTH(date)'))
 			->get();
 
-		//mi creo un array di mesi per sostituirli in mase agli indici successivamente
+		/* inizializzazione variabili per chart 1 */
+		$labels = [];
+		$orderCounts = [];
+		$totalSums = [];
+
+		/* Inizializzazione dell'array associativo per i mesi */
+		$periodMonths = [];
+		for ($i = 0; $i < 12; $i++) {
+			$month = (int) $startDate->copy()->addMonths($i)->format('m');
+			$year = (int) $startDate->copy()->addMonths($i)->format('Y');
+			$periodMonths["$year-$month"] = [
+				'month' => $month,
+				'year' => $year,
+				'order_count' => 0,
+				'total_sum' => 0.0,
+			];
+		}
+
+		/* dalla query alle variabili + mesi */
 		$months = [
 			1 => 'Gennaio',
 			2 => 'Febbraio',
@@ -59,25 +78,6 @@ class StatController extends Controller
 			11 => 'Novembre',
 			12 => 'Dicembre',
 		];
-
-		$labels = [];
-		$orderCounts = [];
-		$totalSums = [];
-
-		/* inizializza mesi dal periodo selezionato */
-		$periodMonths = [];
-		for ($i = 0; $i < 12; $i++) {
-			$month = (int) $startDate->copy()->addMonths($i)->format('m');
-			$year = (int) $startDate->copy()->addMonths($i)->format('Y');
-			$periodMonths["$year-$month"] = [
-				'month' => $month,
-				'year' => $year,
-				'order_count' => 0,
-				'total_sum' => 0.0,
-			];
-		}
-
-		/* dalla query alle variabili */
 		foreach ($orders as $order) {
 			$key = "$order->year-$order->month";
 			if (isset($periodMonths[$key])) {
@@ -85,21 +85,34 @@ class StatController extends Controller
 				$periodMonths[$key]['total_sum'] = $order->total_sum;
 			}
 		}
-
-		/* labels e variabili per la chart */
 		foreach ($periodMonths as $period) {
 			$labels[] = $months[$period['month']] . ' ' . $period['year'];
 			$orderCounts[] = $period['order_count'];
 			$totalSums[] = $period['total_sum'];
 		}
 
+		/* query chart 2 dish quantity */
+		$data = DB::table('dish_order')
+			->select('dish_name', DB::raw('SUM(dish_quantity) AS total_quantity'))
+			->join('orders', 'dish_order.order_id', '=', 'orders.id')
+			->where('orders.restaurant_id', $currentRestaurant->id)
+			->whereBetween('orders.date', [$startDate, $endDate])
+			->groupBy('dish_name')
+			->orderByDesc('total_quantity')
+			->get();
+
+		/* variabili bars per chart 2 */
+		$barLabels = $data->pluck('dish_name')->toArray(); // Etichette delle barre
+		$barQuantities = $data->pluck('total_quantity')->toArray();
+
+		/* chart 1 */
 		$chartjs = app()->chartjs
 			->name('ordersChart')
 			->type('bar')
 			->labels($labels)
 			->datasets([
 				[
-					"label" => "Somma Totale degli Ordini",
+					"label" => "Somma Totale degli Ordini in €",
 					'backgroundColor' => 'rgba(255, 99, 132, 0.6)',
 					'borderColor' => 'rgba(255, 99, 132, 1)',
 					"data" => $totalSums,
@@ -107,7 +120,7 @@ class StatController extends Controller
 					"yAxisID" => "totalAxis",
 				],
 				[
-					"label" => "Numero di Ordini",
+					"label" => "Numero di Ordini ricevuti",
 					'backgroundColor' => 'rgba(75, 192, 192, 0.6)',
 					'borderColor' => 'rgba(75, 192, 192, 1)',
 					"data" => $orderCounts,
@@ -139,6 +152,33 @@ class StatController extends Controller
 				],
 			]);
 
-		return view('admin.stats.index', compact('chartjs', 'selectedPeriod'));
+		/* chart 2 */
+		$chartjs2 = app()->chartjs
+			->name('barChart')
+			->type('bar')
+			->labels($barLabels)
+			->datasets([
+				[
+					'label' => 'Quantità ordinate',
+					'backgroundColor' => '#36A2EB',
+					'data' => $barQuantities,
+				]
+			])
+			->options([
+				'scales' => [
+					'y' => [
+						'stacked' => true,
+					],
+					'x' => [
+						'stacked' => true,
+						'beginAtZero' => true,
+					],
+				],
+				'indexAxis' => 'y',
+				'barThickness' => 30
+			]);
+
+		return view('admin.stats.index', compact('chartjs', 'chartjs2', 'selectedPeriod'));
 	}
 }
+
