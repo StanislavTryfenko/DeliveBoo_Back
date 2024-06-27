@@ -43,6 +43,17 @@
                                     <a href="{{ route('admin.orders.show', $order) }}">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </a>
+
+                                    <!-- Form per provare l'eliminazione dell'ordine
+                                                <form action="{{ route('admin.orders.destroy', $order) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </button>
+                                                </form> 
+                                            -->
+
                                 </td>
                             </tr>
                         @endforeach
@@ -57,4 +68,3 @@
     </div>
 </div>
 @endsection
-
