@@ -9,7 +9,8 @@ use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use App\Models\Dish;
 use App\Models\Order;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewLeadMessage;
 class OrderController extends Controller
 {
 
@@ -29,6 +30,7 @@ class OrderController extends Controller
     public function makePayment(OrderRequest $request, Gateway $gateway)
     {
 
+        $allDishes = $request->allDishes;
         //mi recupero tutti i piatti ordinati
         $order = $request->order;
         //mi recupero l'id del ristorante
@@ -57,6 +59,7 @@ class OrderController extends Controller
                     'order' => $order,
                     'paymentMethodNonce' => $request->token,
                     'all' => $request->all(),
+                
                 ];
                 return response()->json($data, 400);
             }
@@ -76,6 +79,13 @@ class OrderController extends Controller
         $newOrder->date = date('Y-m-d H:i:s');
         //manca status perchè viene messo di default
         $newOrder->save();
+
+        //vado a creare la nuova email con il costruttore sia per l'utente che per il ristoratore
+        Mail::to($request->customerEmail)->send(new NewLeadMessage($allDishes, $newOrder, true));
+
+        Mail::to( $singleRestaurant->contact_email)->send(new NewLeadMessage($order, $singleRestaurant, false));
+
+
 
         //solo dopo aver creato l'ordine, posso fare l'attach con i singoli piatti
         foreach ($order as $dishOrder) {
@@ -108,7 +118,8 @@ class OrderController extends Controller
                 'paymentMethodNonce' => $request->token,
                 'all' => $request->all(),
                 'totalPrice' => $totalPrice,
-                'result' => $result
+                'result' => $result,
+                'allDishes'=>$allDishes,
             ];
             return response()->json($data, 200);
         } else {
