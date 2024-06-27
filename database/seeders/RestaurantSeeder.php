@@ -26,6 +26,17 @@ class RestaurantSeeder extends Seeder
             ['name' => 'Flavors of Italy', 'address' => '987 Via Santa Croce, Venezia, Italia', 'thumb' => 'uploads/flavors-of-italy.jpg'],
 
             ['name' => 'Il Giardino d\'Italia', 'address' => '1234 Via della Stella, Roma, Italia', 'thumb' => 'uploads/ristorante-giardino.jpg'],
+
+            ['name' => 'Mc Donald\'s', 'address' => '1234 Via del Corso , Roma, Italia', 'thumb' => 'uploads/mcdonald.jpg'],
+
+            ['name' => 'KFC', 'address' => '5678 Via del Ponte Vecchio, Firenze, Italia', 'thumb' => 'uploads/kfc.png'],
+
+            ['name' => 'Nobu Sushi', 'address' => '3210 Galleria Vittorio Emanuele II, Milano, Italia', 'thumb' => 'uploads/sushi.jpg'],
+
+            ['name' => 'Hakkasan', 'address' => '1234 Piazza San Marco, Venezia, Italia', 'thumb' => 'uploads/ristorante_cinese.jpg'],
+
+            ['name' => 'Dragon\'s Pearl', 'address' => '1234 Piazza San Marco, Venezia, Italia', 'thumb' => 'uploads/cinese.jpeg'],
+
         ];
 
         for ($i = 0; $i < count($restaurants); $i++) {
