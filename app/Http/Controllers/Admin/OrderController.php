@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class OrderController extends Controller
@@ -74,6 +76,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return to_route('admin.orders.index')->with('message', "L\' ordine: $order è stato eliminato");
     }
 }
