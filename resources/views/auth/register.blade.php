@@ -16,7 +16,7 @@
                             <!--name-->
                             <div class="mb-4 row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome Utente *') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -34,7 +34,7 @@
                             <!--email-->
                             <div class="mb-4 row">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Utente *') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -97,7 +97,7 @@
                             <!--nome ristorante-->
                             <div class="mb-4 row">
                                 <label for="name_restaurant"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome Ristorante *') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name_restaurant" type="type"
@@ -115,7 +115,7 @@
                             <!--indirizzo-->
                             <div class="mb-4 row">
                                 <label for="address"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo Ristorante *') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="address" type="type"
@@ -131,7 +131,7 @@
                             </div>
 
                             <!--Email Ristorante-->
-                            <div class="mb-4 row">
+                            <!-- <div class="mb-4 row">
                                 <label for="contact_email"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Email Ristorante *') }}</label>
 
@@ -146,12 +146,12 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!--vat-->
                             <div class="mb-4 row">
                                 <label for="vat"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('P.IVA Ristorante *') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('P.IVA *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="vat" type="text"
@@ -216,7 +216,7 @@
                             
                             <!--types-->
                             <div class="mb-4 row">
-                                <label class="form-label col-md-4">{{ __('Categorie Ristorante *') }}</label>
+                                <label class="form-label col-md-4">{{ __('Categorie *') }}</label>
                             
                                 <div class="d-flex flex-wrap gap-3 col-md-6">
                             
