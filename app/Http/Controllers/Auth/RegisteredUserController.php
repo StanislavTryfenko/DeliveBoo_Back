@@ -40,10 +40,10 @@ class RegisteredUserController extends Controller
         // dd(($request->all()));
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string','email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'name_restaurant' => 'required|min:4|max:255',
-            'contact_email' => 'required|email|max:255|unique:restaurants,contact_email',
+            // 'contact_email' => 'required|email|max:255|unique:restaurants,contact_email',
             'address' => 'required|min:4|max:255',
             'phone_number' => 'nullable|numeric|max_digits:20|min_digits:3',
             'logo' => 'image|mimes:png,jpg|max:2048',
@@ -63,7 +63,6 @@ class RegisteredUserController extends Controller
             'user_id' => $user->id,
             'name_restaurant' => $request->name_restaurant,
             'slug' => Str::slug($request->name_restaurant, '-'),
-            'contact_email' => $request->contact_email,
             'address' => $request->address,
             'phone_number' => $request->phone_number,
             'vat' => $request->vat,

@@ -41,6 +41,7 @@ class RestaurantController extends Controller
     public function getSingleRestaurant($id)
     {
         $restaurant = Restaurant::with([
+            'user',
             'types',
             'dishes' => function ($query) {
                 $query->where('visible', 1);

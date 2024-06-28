@@ -5,7 +5,7 @@ function validateRegisterForm(event) {
     const restaurantName = document.forms['registerForm']['name_restaurant'];
     const address = document.forms['registerForm']['address'];
     const vat = document.forms['registerForm']['vat'];
-    const contactEmail = document.forms['registerForm']['contact_email'];
+    // const contactEmail = document.forms['registerForm']['contact_email'];
     const types = document.forms['registerForm']['typeList[]'];
     const phoneNumber = document.forms['registerForm']['phone_number'];
     const thumb = document.forms['registerForm']['thumb'];
@@ -109,18 +109,18 @@ function validateRegisterForm(event) {
     }
 
     //contactEmail
-    let contactEmailHelp = document.getElementById('contactEmailHelp');
-    if (contactEmailHelp) {
-        contactEmailHelp.remove();
-        contactEmail.classList.remove('is-invalid');
-    }
-    contactEmail.classList.add('is-valid');
-    if (!contactEmail.value || !contactEmail.value.includes('@') || !contactEmail.value.includes('.')) {
-        contactEmail.insertAdjacentHTML('afterend', '<small id="contactEmailHelp" class="text-danger">Devi inserire un indirizzo email di contatto</small>');
-        contactEmail.classList.remove('is-valid');
-        contactEmail.classList.add('is-invalid');
-        pushForm = false;
-    }
+    // let contactEmailHelp = document.getElementById('contactEmailHelp');
+    // if (contactEmailHelp) {
+    //     contactEmailHelp.remove();
+    //     contactEmail.classList.remove('is-invalid');
+    // }
+    // contactEmail.classList.add('is-valid');
+    // if (!contactEmail.value || !contactEmail.value.includes('@') || !contactEmail.value.includes('.')) {
+    //     contactEmail.insertAdjacentHTML('afterend', '<small id="contactEmailHelp" class="text-danger">Devi inserire un indirizzo email di contatto</small>');
+    //     contactEmail.classList.remove('is-valid');
+    //     contactEmail.classList.add('is-invalid');
+    //     pushForm = false;
+    // }
 
     //phoneNumber
     if (phoneNumber.value) {
