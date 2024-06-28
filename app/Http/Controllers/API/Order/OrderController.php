@@ -130,7 +130,9 @@ class OrderController extends Controller
                 'paymentMethodNonce' => $request->token,
                 'all' => $request->all(),
                 'totalPrice' => $totalPrice,
-                'result' => $result
+                'result' => $result,
+                // debugg comment 
+                'allDishes'=>$allDishes,
             ];
             return response()->json($data, 401);
         }

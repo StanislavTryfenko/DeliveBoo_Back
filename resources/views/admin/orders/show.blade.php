@@ -4,9 +4,8 @@
     <div class="container-fluid p-4">
         <div class="row">
             <div class="col-6">
-                <h2>Ordine # {{ $order->id }}</h2>
                 <p class="mt-4"><strong>Prezzo totale: </strong>€ {{ $order->total_price }}</p>
-                <p><strong>Data dell'ordine: </strong>{{ $order->date }}</p>
+                <p><strong>Data dell'ordine: </strong>{{ \Carbon\Carbon::parse($order->date)->format('d-m-Y H:i') }}</p>
                 <p><strong>Stato dell'ordine: </strong>{{ $order->status }}</p>
             </div>
             <div class="col-6">

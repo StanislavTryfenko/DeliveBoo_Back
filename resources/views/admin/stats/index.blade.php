@@ -34,9 +34,7 @@
         </div>
       </div>
       <div class="col-4 mb-4 p-1 h-100 align-self-end">
-        <p class="fw-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, provident corporis repudiandae
-          perspiciatis
-          molestiae necessitatibus soluta natus consectetur labore quisquam.</p>
+        <p class="fw-light">Questo grafico mostra lo storico degli ordini al nostro ristorante. Gli ordini sono raggruppati per mese e rappresentano il numero totale di ordini ricevuti con il relativo incasso. Attraverso questo grafico è possibile analizzare sia la quantità di ordini che le entrare mensili.</p>
       </div>
       <div class="col-8">
         <div class="card p-3 chart_card">
@@ -44,9 +42,7 @@
         </div>
       </div>
       <div class="col-4 p-1 h-100 align-self-end">
-        <p class="fw-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, provident corporis repudiandae
-          perspiciatis
-          molestiae necessitatibus soluta natus consectetur labore quisquam.</p>
+        <p class="fw-light">Questo grafico mostra i piatti più venduti nel periodo selezionato, con la quantità di ogni piatto. Dalla lista si nota il numero di ordini ricevuti per ogni piatto e permette di vedere i piatti che vengono acquistati maggiormente</p>
       </div>
     </div>
 
