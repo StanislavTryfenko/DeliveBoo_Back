@@ -25,6 +25,7 @@ class RestaurantController extends Controller
         $restaurant = $user->restaurant;
         $typeList = Type::all();
 
-        return view('admin.restaurants.index', compact('restaurant', 'typeList'));
+
+        return view('admin.restaurants.index', compact('restaurant', 'typeList', 'user'));
     }
 }

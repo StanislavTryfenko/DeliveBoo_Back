@@ -5,7 +5,7 @@ function validateRegisterForm(event) {
     const restaurantName = document.forms['registerForm']['name_restaurant'];
     const address = document.forms['registerForm']['address'];
     const vat = document.forms['registerForm']['vat'];
-    const contactEmail = document.forms['registerForm']['contact_email'];
+    // const contactEmail = document.forms['registerForm']['contact_email'];
     const types = document.forms['registerForm']['typeList[]'];
     const phoneNumber = document.forms['registerForm']['phone_number'];
     const thumb = document.forms['registerForm']['thumb'];

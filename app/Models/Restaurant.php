@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Restaurant extends Model
 {
     use HasFactory;
-    protected $fillable = ['contact_email', 'vat', 'name_restaurant', 'slug', 'address', 'phone_number', 'logo', 'thumb', 'user_id'];
+    protected $fillable = ['vat', 'name_restaurant', 'slug', 'address', 'phone_number', 'logo', 'thumb', 'user_id'];
 
     /**
      * Get the user that owns the Restaurant
@@ -32,12 +32,12 @@ class Restaurant extends Model
         return $this->belongsToMany(Type::class);
     }
 
-    public function dishes():HasMany
+    public function dishes(): HasMany
     {
         return $this->hasMany(Dish::class);
     }
 
-    public function orders():HasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
