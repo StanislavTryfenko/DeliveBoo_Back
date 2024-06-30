@@ -11,8 +11,8 @@ use App\Models\Restaurant;
 class StatController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
-	 */
+		* Display a listing of the resource.
+		*/
 	public function index(Request $request)
 	{
 		/* Accesso ai dati del ristorante corrente; reindirizza alla registrazione se non esiste */

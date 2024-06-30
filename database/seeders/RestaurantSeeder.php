@@ -52,7 +52,7 @@ class RestaurantSeeder extends Seeder
             $restaurant->save();
         }
 
-        $types_array = range(1, 6);
+        $types_array = range(1, 8);
 
         foreach (Restaurant::all() as $restaurant) {
             $restaurant->types()->attach($faker->randomElements($types_array, null));

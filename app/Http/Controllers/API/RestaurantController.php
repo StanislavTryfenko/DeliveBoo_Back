@@ -76,7 +76,7 @@ class RestaurantController extends Controller
         HAVING COUNT(`types`.`id`) = 3; */
 
         $query = DB::table('restaurants')
-            ->select('restaurants.name_restaurant', 'restaurants.slug', 'restaurants.logo', 'restaurants.thumb', 'restaurants.id')
+            ->select('restaurants.name_restaurant', 'restaurants.slug', 'restaurants.logo', 'restaurants.address', 'restaurants.thumb', 'restaurants.id')
             ->join('restaurant_type', 'restaurants.id', '=', 'restaurant_type.restaurant_id')
             ->join('types', 'restaurant_type.type_id', '=', 'types.id')
             ->whereIn('types.id', $typesList)
