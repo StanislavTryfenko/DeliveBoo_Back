@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" id="my_header">
+<nav class="navbar navbar-expand-md shadow-sm" id="my_header">
     <div class="container collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav me-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/dashboard') }}">
-                    <strong class="text-info-emphasis fs-3">DeliveBoo</strong>
+                <a class="nav-link text-white" href="{{ url('/dashboard') }}">
+                    <strong class="fs-3">DeliveBoo</strong>
                 </a>
             </li>
         </ul>
@@ -13,16 +13,16 @@
             <!-- Authentication Links -->
             @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
                 @if (Route::has('register'))
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
                     </li>
                 @endif
             @else
                 <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
                     </a>
@@ -45,3 +45,5 @@
         </ul>
     </div>
 </nav>
+
+
